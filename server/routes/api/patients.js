@@ -12,18 +12,6 @@ const Book = require('../../models/Book');
 // @access Public
 router.get("/test", (req, res) => res.send("patient route testing!"));
 
-//@route post api/patient
-//@description add/save patient detail
-//@access public
-
-// router.post("/", (req, res) => {
-//     Patient.create(req.body)
-//     .then(patient => res.json({msg: "Patient added successfully.."}))
-//     .catch(err =>
-//         res.status(400).json({error: "Unable to add this patien"})
-//         );
-// });
-
 //@route post api?patient
 //@description add/save patient detail
 //access public
@@ -118,66 +106,6 @@ router.delete("/deletePatient/:id",(req,res) =>{
 //@route UPDATE api/patient
 //@description delete patient by patient id
 //public access
-
-router.put("/update/:patientId",(req,res) =>{
-    console.log("patient id",req.params.patientId);
-    Patient.findOneAndUpdate({patientId:req.params.patientId},req.body,{new:true})
-    .then(patient =>{
-        if (patient==null) {
-            res.status(404).json({error:"Unable to update"})
-        }else{
-            res.json({message:"Update successfully"})
-        }
-    })
-    .catch(err => res.status(500).json({error:"server not respons"}))
-        });
- 
-
-//@route DELETE api/patient
-//@description delete patient by patient id
-//public access
-router.delete("/delete/:patientId",(req,res) => {
-    Patient.findOneAndRemove({patientId:req.params.patientId})
-    .then(patient =>{
-        if (patient==null) {
-            res.status(404).json({error:"Unable to delete"})
-        }else{
-            res.json({message:"delete successfully"})
-        }
-    })
-    .catch(err => res.status(500).json({error:"server not respons"}))
-        });
-
-//nested response
-
-router.get("/getDetails",(req,res) =>{
-    Patient.find()
-    .then(function(patient){
-        for (let index = 0; index < patient.size(); index++) {
-            res.json({a:patinet.patientId})
-        }
-            
-        
-    })
-    .catch(err =>res.status(400).json({error:"not found patient"}))
-});
-
-//nested response create 
-function PatientModel(patinet){
-    this.id=patinet.id,
-    this.patientFastName=patinet.patientFastName,
-    this.patientLastName=patinet,
-    this.email=patinet.email,
-    this.phone=patinet.phone,
-    this.typeOfWalkin=patient.typeOfWalkin,
-    this.aligment=patient.aligment,
-    this.doctor=patient.doctor,
-    this.updated_date=patient.updated_date,
-    this.content={
-        patient
-    }
-}
-
 
 module.exports = router;
 
