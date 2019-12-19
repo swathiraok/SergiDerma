@@ -1,38 +1,45 @@
 
 const mongoose = require('mongoose');
 const shortId=require('short-id');
-
+const generateId = require('nanoid/generate')
+const nanoid = require('nanoid');
 const PatientSchema=new mongoose.Schema({
-    patientId:{
+    ptntId:{
         type:String,
-        default:shortId.generate,
+        default:() =>"PKN1"+nanoid(6),
         require:true
     },
-    patientFirstName:{
-        type:String,
-        require:true
-    },
-    patientLastName:{
+    frstNm:{
         type:String,
         require:true
     },
-    phone:{
+    mddlNm:{
+        type:String,
+        require:true
+    },
+    lstNm:{
+        type:String,
+        require:true
+    },
+    gndr:{
+        type:String,
+        require:true
+    },
+    PhnNm:{
         type:Number,
+        require:true
+    },
+    dob:{
+        type:String,
         require:true
     },
     email:{
         type:String
     },
-    typeOfWalkin:{
+
+    type:{
         type:String,
         require:true
-    },
-    aligment:{
-        type:String,
-        require:true
-    },
-    doctor:{
-        type:String
     },
     updated_date: {
         type: Date,

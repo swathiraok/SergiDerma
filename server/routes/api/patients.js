@@ -25,13 +25,13 @@ router.get("/test", (req, res) => res.send("patient route testing!"));
 //    "aligment":""
 //    "doctor":""}
 router.post("/addPatient/",[
-    check('patientFirstName','First name is requered!!').not().isEmpty(),
-    check('patientLastName','Last name is requered!!').not().isEmpty(),
+    check('frstNm','First name is required!!').not().isEmpty(),
+    check('lstNm','Last name is required!!').not().isEmpty(),
+    check('gndr','gender is required!!').not().isEmpty(),
+    check('dob','date of birth is required!!').not().isEmpty(),
     check('email','Your email id is not valid').not().isEmpty(),
-    check('phone','Your phone number is not valid').not().isEmpty(),
-    check('typeOfWalkin','type of walkin is requered').not().isEmpty(),
-    check('aligment','aligment is requered').not().isEmpty(),
-    check('doctor','assign to doctor').not().isEmpty()
+    check('PhnNm','Your phone number is not valid').not().isEmpty(),
+    check('type','type of walkin is requered').not().isEmpty()
 ],
 function(req,res){
     const errors=validationResult(req);
@@ -43,8 +43,9 @@ function(req,res){
         .then(patient => res.json({id:patient.id,
                                    message: "Patient added successfully..",
                                    status:"200",
-                                   patientId:patient.patientId }))
-        .catch(err =>res.status(500).json({error:"Unable to create server"}))
+                                   patientId:patient.ptntId }))
+        .catch(err =>res.status(500).json(err))
+        // .catch(err =>res.status(500).json({error:"Unable to create server"}))
     }
 });
 
@@ -102,10 +103,6 @@ router.delete("/deletePatient/:id",(req,res) =>{
     .catch(err =>res.status(404).json({error: "patient not found"}))
     
 });
-
-//@route UPDATE api/patient
-//@description delete patient by patient id
-//public access
 
 module.exports = router;
 
