@@ -21,7 +21,7 @@ router.get("/getAllDoctors", (req, res) => {
 // @description add  doctor
 // @access public 
 
-router.post("/register",[
+router.post("/",[
     check('firstName','First name is requered!!').not().isEmpty(),
     check('lastName','Last name is requered!!').not().isEmpty(),
     check('email','Your email id is not valid').not().isEmpty(),
@@ -37,7 +37,7 @@ function(req,res){
         return res.status(422).jsonp(errors.array());
     }else{
         Doctor.create(req.body)
-        .then(patient => res.json({message: "Doctor added successfully..",
+        .then(doctors => res.json({message: "Doctor added successfully..",
                                    status:"200",}))
         .catch(err =>res.status(500).json({error:"Unable to create server"}))
     }
@@ -46,7 +46,7 @@ function(req,res){
 // @route GET api/doctor/getAll
  // @description Get All Doctor with pagination
  // @access Public npm install express-validator
-router.get('/getAll',(req,res) => {
+router.get('/',(req,res) => {
     var pageNo = parseInt(req.query.pageNo)
     var size = parseInt(req.query.size)
     var query = {}
@@ -74,7 +74,7 @@ router.get('/getAll',(req,res) => {
 // @route GET doctor/getById:id
  // @description Get single Doctor by id
  // @access Public npm install express-validator
- router.get("getById/:id", (req, res) => {
+ router.get("/:id", (req, res) => {
   Doctor.findById(req.params.id)
      .then(doctor => res.json(doctor))
      .catch(err => res.status(404).json({ msg: " Doctor Record are Not found.." }));
@@ -84,7 +84,7 @@ router.get('/getAll',(req,res) => {
  // @route put doctor/update:id
  // @description Update Doctors
  // @access Public
- router.put("update/:id", (req, res) => {
+ router.put("/:id", (req, res) => {
   Doctor.findByIdAndUpdate(req.params.id, req.body)
      .then(doctor => res.json({ msg: "Updated successfully" }))
      .catch(err =>
@@ -95,7 +95,7 @@ router.get('/getAll',(req,res) => {
  // @route GET doctor/deleteById:id
  // @description Delete doctor by id
  // @access Public
- router.delete("deleteById/:id", (req, res) => {
+ router.delete("/:id", (req, res) => {
   Doctor.findByIdAndRemove(req.params.id, req.body)
      .then(doctor => res.json({ mgs: "Doctor entry deleted successfully" }))
      .catch(err => res.status(404).json({ error: "No such a Doctor" }));
