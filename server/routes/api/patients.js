@@ -36,7 +36,7 @@ router.get("/test", (req, res) => res.send("patient route testing!"));
 //    "typeOfWalkin":""
 //    "aligment":""
 //    "doctor":""}
-router.post("/",[
+router.post("/addPatient/",[
     check('patientFirstName','First name is requered!!').not().isEmpty(),
     check('patientLastName','Last name is requered!!').not().isEmpty(),
     check('email','Your email id is not valid').not().isEmpty(),
@@ -52,9 +52,10 @@ function(req,res){
         return res.status(422).jsonp(errors.array());
     }else{
         Patient.create(req.body)
-        .then(patient => res.json({message: "Patient added successfully..",
+        .then(patient => res.json({id:patient.id,
+                                   message: "Patient added successfully..",
                                    status:"200",
-                                patientId:patient.patientId }))
+                                   patientId:patient.patientId }))
         .catch(err =>res.status(500).json({error:"Unable to create server"}))
     }
 });
@@ -80,11 +81,15 @@ router.get("/getAll",(req,res) =>{
 //    "aligment":""
 //    "doctor":""}
 
-router.put("/patientUpdate/:patientId",(req,res) =>{
+router.put("/patientUpdate/:id",async function(req, res) {
     
-    Patient.findOneAndUpdate(req.params.patientId, req.body)
-    .then(patient =>res.json({msg: "Update patient successfully"}))
+    // const id =req.query.patientId;
+
+    Patient.findByIdAndUpdate(req.params.id, req.body)
+    .then(patient =>res.json({message: "Update patient successfully"}))
     .catch(err =>res.status(404).json({error: "patient not found"}))
+
+    
 });
 
 
@@ -92,9 +97,9 @@ router.put("/patientUpdate/:patientId",(req,res) =>{
 //@rounte GET api/patient
 //@description get individual data
 //public access
-router.get("/patientInd/:patientId",(req,res) =>{
-    var id=req.query.patientId;
-    Patient.findOne(id)
+router.get("/patientInd/:id",(req,res) =>{
+
+    Patient.findById(req.params.id)
             .then(patient => res.json(patient))
             .catch(err => res.status(404).json({error: "Unable to found!!"}))
 });
@@ -102,22 +107,76 @@ router.get("/patientInd/:patientId",(req,res) =>{
 //@route DELETE api/patient
 //@description delete patient by patient id
 //public access
-router.delete("/:patientId",(req,res) =>{
-    Patient.findOneAndDelete(req.params.patientId)
-    .then(patient =>res.json({msg: "patient deleted successfully"}))
+router.delete("/deletePatient/:id",(req,res) =>{
+    
+    Patient.findByIdAndRemove(req.params.id)
+    .then(patient =>res.json({message: "patient deleted successfully"}))
     .catch(err =>res.status(404).json({error: "patient not found"}))
+    
 });
 
+//@route UPDATE api/patient
+//@description delete patient by patient id
+//public access
 
+router.put("/update/:patientId",(req,res) =>{
+    console.log("patient id",req.params.patientId);
+    Patient.findOneAndUpdate({patientId:req.params.patientId},req.body,{new:true})
+    .then(patient =>{
+        if (patient==null) {
+            res.status(404).json({error:"Unable to update"})
+        }else{
+            res.json({message:"Update successfully"})
+        }
+    })
+    .catch(err => res.status(500).json({error:"server not respons"}))
+        });
+ 
+
+//@route DELETE api/patient
+//@description delete patient by patient id
+//public access
+router.delete("/delete/:patientId",(req,res) => {
+    Patient.findOneAndRemove({patientId:req.params.patientId})
+    .then(patient =>{
+        if (patient==null) {
+            res.status(404).json({error:"Unable to delete"})
+        }else{
+            res.json({message:"delete successfully"})
+        }
+    })
+    .catch(err => res.status(500).json({error:"server not respons"}))
+        });
 
 //nested response
 
 router.get("/getDetails",(req,res) =>{
     Patient.find()
-    .then(patient =>res.json({patient,
-                            message:"nested start"}))
+    .then(function(patient){
+        for (let index = 0; index < patient.size(); index++) {
+            res.json({a:patinet.patientId})
+        }
+            
+        
+    })
     .catch(err =>res.status(400).json({error:"not found patient"}))
 });
+
+//nested response create 
+function PatientModel(patinet){
+    this.id=patinet.id,
+    this.patientFastName=patinet.patientFastName,
+    this.patientLastName=patinet,
+    this.email=patinet.email,
+    this.phone=patinet.phone,
+    this.typeOfWalkin=patient.typeOfWalkin,
+    this.aligment=patient.aligment,
+    this.doctor=patient.doctor,
+    this.updated_date=patient.updated_date,
+    this.content={
+        patient
+    }
+}
 
 
 module.exports = router;

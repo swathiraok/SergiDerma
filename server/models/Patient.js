@@ -8,7 +8,7 @@ const PatientSchema=new mongoose.Schema({
         default:shortId.generate,
         require:true
     },
-    patienFirstName:{
+    patientFirstName:{
         type:String,
         require:true
     },
