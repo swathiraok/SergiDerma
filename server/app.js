@@ -7,6 +7,7 @@ var cors = require("cors");
 // routes
 const books = require("./routes/api/books");
 const patients = require("./routes/api/patients");
+const patientsInfor = require("./routes/api/patientInformation");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => res.send("Hello world!"));
 // use Routes
 app.use("/api/books", books);
 app.use("/api/patients",patients);
+app.use("/api/patientsInfor",patientsInfor);
 
 const port = process.env.PORT || 8082;
 
