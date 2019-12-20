@@ -6,8 +6,8 @@ var cors = require("cors");
 
 // routes
 //const books = require("./routes/api/books");
-const doctorsApi = require("./routes/api/branchCodeMaster");
-
+const doctorsApi = require("./routes/api/doctorProfiles");
+const branchs = require("./routes/api/branchs");
 const app = express();
 
 // Connect Database
@@ -23,7 +23,8 @@ app.get("/", (req, res) => res.send("Hello world!"));
 
 // use Routes
 //app.use("/api/books", books);
-app.use("/doctor", doctorsApi);
+app.use("/doctors", doctorsApi);
+app.use("/branchs",branchs);
 
  
 const port = process.env.PORT || 8082;

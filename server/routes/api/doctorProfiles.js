@@ -22,11 +22,11 @@ router.get("/getAllDoctors", (req, res) => {
 // @access public 
 
 router.post("/",[
-    check('firstName','First name is requered!!').not().isEmpty(),
-    check('lastName','Last name is requered!!').not().isEmpty(),
+    check('frstNm','First name is requered!!').not().isEmpty(),
+    check('lstNm','Last name is requered!!').not().isEmpty(),
     check('email','Your email id is not valid').not().isEmpty(),
-    check('phoneNumber','Your phone number is not valid').not().isEmpty(),
-    check('specialization','specialization is requered').not().isEmpty(),
+    check('PhnNm','Your phone number is not valid').not().isEmpty(),
+    check('spclztion','specialization is requered').not().isEmpty(),
     check('qualification','qualification is requered').not().isEmpty(),
      
 ],

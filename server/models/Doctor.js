@@ -1,21 +1,25 @@
 const mongoose = require('mongoose');
  
  
-const generateId = require('nanoid/generate')
+ const generateId = require('nanoid/generate')
 const nanoid = require('nanoid');
 
 const DoctorSchema = new mongoose.Schema({
   
  
-    firstName: {
+    frstNm: {
     type: String,
     required: true
   },
-  lastName: {
+  lstNm: {
     type: String,
     required: true
   },
-  specialization: {
+  midlNm:{
+    type: String,
+    required: true
+  },
+  spclztion: {
     type: String,
     required: true
   },
@@ -23,7 +27,7 @@ const DoctorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  phoneNumber:{
+  PhnNm:{
     type:String,
     required:true
   },
@@ -31,36 +35,23 @@ const DoctorSchema = new mongoose.Schema({
     type:String,
     required:true
   },
-  dateOfBirth:{
+  dob:{
     type:Date,
-    default: Date.now
-  },
-  dateOfJoining:{
-    type:Date,
-    default: Date.now
-  },
-  address:{
-      type :String,
-      required:true
-  },
-  pinCode:{
-      type:String,
-      required:true
-  },
-  country:{
-      type:String,
-      required:true
+    //default: Date.now
   },
   gender:{
       type:String,
       required:true
   },
-  doctorId:{
+  dctrId:{
       type:String,
       default:() =>"DKN1"+nanoid(6),
-      require:true
-      
+      require:true   
+  },
+  hsptlNm:{
+      type:String,
+      required:true
   }
 });
 
-module.exports = Doctor = mongoose.model('branchCodeMaster', DoctorSchema);
+module.exports = Doctor = mongoose.model('doctorProfile', DoctorSchema);
