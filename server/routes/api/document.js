@@ -72,4 +72,21 @@ router.post('/upload', upload.single('file'), (req, res, function(err){
 }));
 */
 
+/**route GET /files
+ * @desc method to Display all the files in the json format 
+ */
+router.get('/files',(req, res)=>{
+    gfs.files.find().toArray((err, files)=>{
+        //checl if files exists
+        if(!files || files.length === 0){
+            return res.status(404).json({
+                err:'No files exist'
+            });
+        }
+
+        //Files exist
+        return res.json(files);
+    });
+});
+
 module.exports = router;
