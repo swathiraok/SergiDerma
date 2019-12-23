@@ -4,7 +4,6 @@ const {check, validationResult} = require('express-validator/check');
 
 //load patient model
 const Patient = require("../../models/Patient");
-const Book = require('../../models/Book');
 
 
 // @route GET api/books/test
@@ -16,14 +15,17 @@ router.get("/test", (req, res) => res.send("patient route testing!"));
 //@description add/save patient detail
 //access public
 //server validation check
-//request body {
-//    "patientFirstName":"",
-//    "patientLastName":""
-//    "email":""
-//    "phone":""
-//    "typeOfWalkin":""
-//    "aligment":""
-//    "doctor":""}
+/* request body 
+{
+    "patientFirstName":"",
+    "patientLastName":""
+    "email":""
+    "phone":""
+    "typeOfWalkin":""
+    "aligment":""
+    "doctor":""
+}
+     */
 router.post("/addPatient/",[
     check('frstNm','First name is required!!').not().isEmpty(),
     check('lstNm','Last name is required!!').not().isEmpty(),
@@ -44,36 +46,45 @@ function(req,res){
                                    message: "Patient added successfully..",
                                    status:"200",
                                    patientId:patient.ptntId }))
-        .catch(err =>res.status(500).json(err))
-        // .catch(err =>res.status(500).json({error:"Unable to create server"}))
+        .catch(err =>res.status(500).json(err));
     }
 });
 
-//@route GET api/patient
-//@description get all patient
-//public access
 
-router.get("/getAll",(req,res) =>{
-    Patient.find()
-    .then(patients =>res.json(patients))
-    .catch(err =>res.status(404).json({error: "Patients not found"}))
+
+//@route GET api/patient
+//@description get all patient with limit size and after skip size
+//public access
+router.get("/patientList",(req,res) =>{
+
+    let skipPage=Number(req.query.page);
+    let limitPage=Number(req.query.size);
+
+    console.log("skip",skipPage)
+    console.log("query",req.query)
+    Patient.find().skip(skipPage).limit(limitPage)
+            .then(patient =>res.json(patient))
+            .catch(err =>res.json(err));
 });
+
+
 //@route PUT api/patient
 //@description update patient
 //public access
-//update body  {
-//    "patientFirstName":"",
-//    "patientLastName":""
-//    "email":""
-//    "phone":""
-//    "typeOfWalkin":""
-//    "aligment":""
-//    "doctor":""}
+
+/* individual or multiple key and value update, body  {
+   "patientFirstName":"",
+   "patientLastName":""
+    "email":""
+    "phone":""
+    "typeOfWalkin":""
+    "aligment":""
+    "doctor":""
+} */
 
 router.put("/patientUpdate/:id",async function(req, res) {
     
     // const id =req.query.patientId;
-
     Patient.findByIdAndUpdate(req.params.id, req.body)
     .then(patient =>res.json({message: "Update patient successfully"}))
     .catch(err =>res.status(404).json({error: "patient not found"}))
@@ -81,10 +92,32 @@ router.put("/patientUpdate/:id",async function(req, res) {
     
 });
 
+//@route Serach api/patient
+//@description search globaly patient 
+//public access
+/* search params by first name or last name or email or phone */
+router.get("/serachPatient/:searchName",(req,res) =>{
+    var searchItem=req.params.searchName;
+    console.log("item name",searchItem);
+    Patient.find()
+                .then(function(patient){
+                    //filter patient list
+                        var filt=patient.filter(word =>word.frstNm==searchItem || word.lstNm==searchItem || word.PhnNm==searchItem || word.email==searchItem);
+                        if (filt.length==0) {
+                            res.status(203).json({
+                                message:"Unable to find " + req.params.searchName
+                            })
+                        }else{
+                            res.json(filt)
+                        }
+                        
+                })
+                .catch(err =>res.status(404).json(err));
+});
 
 
 //@rounte GET api/patient
-//@description get individual data
+//@description get individual patient data
 //public access
 router.get("/patientInd/:id",(req,res) =>{
 
@@ -102,6 +135,19 @@ router.delete("/deletePatient/:id",(req,res) =>{
     .then(patient =>res.json({message: "patient deleted successfully"}))
     .catch(err =>res.status(404).json({error: "patient not found"}))
     
+});
+
+
+// not in use,to testing purpose ,i will remove after test done
+router.get("/all",(req,res) =>{
+    Patient.find()
+    .then(function(patient){
+        patient.forEach(function(patient){
+            console.log("id",patient.ptntId)
+            res.json(patient.ptntId)
+        })
+    })
+    .catch(err =>res.status(404).json({error: "Patients not found"}))
 });
 
 module.exports = router;
