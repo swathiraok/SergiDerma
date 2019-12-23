@@ -1,6 +1,7 @@
 // app.js
 
 const express = require("express");
+// const multer = require('multer')
 const connectDB = require("./config/db");
 var cors = require("cors");
 
@@ -25,6 +26,12 @@ app.get("/", (req, res) => res.send("Hello world!"));
 //app.use("/api/books", books);
 app.use("/doctors", doctorsApi);
 app.use("/branchs",branchs);
+// app.use(multer({ dest: './uploads', 
+// rename:function(fieldname, filename){
+//     return filename;
+// },
+// }));
+
 
  
 const port = process.env.PORT || 8082;

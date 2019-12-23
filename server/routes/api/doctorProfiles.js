@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
+ 
 
 const {check, validationResult} = require('express-validator/check');
 
@@ -37,11 +38,17 @@ function(req,res){
         return res.status(422).jsonp(errors.array());
     }else{
         Doctor.create(req.body)
-        .then(doctors => res.json({message: "Doctor added successfully..",
-                                   status:"200",}))
-        .catch(err =>res.status(500).json({error:"Unable to create server"}))
+        .then(doctors => res.json({message: "Doctor added successfully.."}))
+        .catch(err => res.status(500).json(err))
+        
     }
 });
+
+
+
+
+
+
 
 // @route GET api/doctor/getAll
  // @description Get All Doctor with pagination
@@ -101,4 +108,11 @@ router.get('/',(req,res) => {
      .catch(err => res.status(404).json({ error: "No such a Doctor" }));
  });
 
+//  router.post('/photo', (req, res)=>{
+//      var newItem = new Item();
+//      newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
+//      newItem.img.contentType = 'image/png';
+//      newItem.save();
+//  });
+ 
 module.exports = router;

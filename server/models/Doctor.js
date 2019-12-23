@@ -52,6 +52,10 @@ const DoctorSchema = new mongoose.Schema({
       type:String,
       required:true
   }
+  // img:{
+  //   data: Buffer,
+  //   type: String
+  // }
 });
 
 module.exports = Doctor = mongoose.model('doctorProfile', DoctorSchema);
