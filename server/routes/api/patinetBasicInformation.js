@@ -173,6 +173,7 @@ router.get("/serachPatient/:searchName",(req,res) =>{
                 .then(function(patientInfo){
                     //filter patient list
                         var filt=patientInfo.filter(word =>word.ptHeight==searchItem || word.ptWeight==searchItem || word.ptBMI==searchItem);
+                        
                         if (filt.length==0) {
                             res.status(203).json({
                                 message:"Unable to find " + req.params.searchName
