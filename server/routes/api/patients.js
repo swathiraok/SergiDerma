@@ -142,10 +142,16 @@ router.delete("/deletePatient/:id",(req,res) =>{
 router.get("/all",(req,res) =>{
     Patient.find()
     .then(function(patient){
+        var a;
         patient.forEach(function(patient){
+            a={
+                aa:patient,
+                bb:patient.ptntId
+            }
             console.log("id",patient.ptntId)
-            res.json(patient.ptntId)
+            
         })
+        res.json(a)
     })
     .catch(err =>res.status(404).json({error: "Patients not found"}))
 });

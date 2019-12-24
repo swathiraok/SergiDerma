@@ -1,6 +1,5 @@
 const mongoos = require('mongoose');
 
-
 const PatientInformationSchema=new mongoos.Schema({
     ptntId:{
         type:String,
