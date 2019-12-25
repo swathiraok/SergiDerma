@@ -1,5 +1,5 @@
 {
-  "name": "mern_a_to_z",
+  "name": "surgiderma",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -24,8 +24,11 @@
     "config": "^3.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-validator": "^6.3.0",
     "mongoose": "^5.5.15",
     "multer-gridfs-storage": "^4.0.1",
+    "nanoid": "^2.1.8",
+    "short-id": "0.1.0-1",
     "validation": "0.0.1"
   },
   "devDependencies": {
