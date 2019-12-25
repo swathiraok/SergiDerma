@@ -21,22 +21,22 @@ router.get("/", (req, res) => {
 router.post(
   "/",
   [
-    check("frstNm", "First name is requered!!")
+    check("frstNm", "First name is required!!")
       .not()
       .isEmpty(),
-    check("lstNm", "Last name is requered!!")
+    check("lstNm", "Last name is required!!")
       .not()
       .isEmpty(),
-    check("email", "Your email id is not valid")
+    check("email", "email required")
       .not()
       .isEmpty(),
-    check("phnNm", "Your phone number is not valid")
+    check("phnNm", "phoneNumber required ")
       .not()
       .isEmpty(),
-    check("spclztion", "specialization is requered")
+    check("spclztion", "specialization is required")
       .not()
       .isEmpty(),
-    check("qualification", "qualification is requered")
+    check("qualification", "qualification is required")
       .not()
       .isEmpty()
   ],
@@ -55,7 +55,7 @@ router.post(
 
 // @route GET doctors/
 // @description Get All Doctor with pagination
-// @access Public npm install express-validator
+// @access Public 
 router.get("/", (req, res) => {
   var pageNo = parseInt(req.query.pageNo);
   var size = parseInt(req.query.size);
@@ -63,7 +63,7 @@ router.get("/", (req, res) => {
   if (pageNo < 0 || pageNo === 0) {
     response = {
       error: true,
-      message: "invalid page number, should start with 1"
+      message: "invalid page number"
     };
     return res.json(response);
   }

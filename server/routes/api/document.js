@@ -21,7 +21,9 @@ conn.once('open',() => {
     gfs.collection('uploads')
 });
 
-//create a storage engine s
+/**
+ * @description storage engine to upload the file.
+ */
 const storage = GridFsStorage({ 
     url: mongoURI,
     file: (req, file) =>{
@@ -41,13 +43,12 @@ const storage = GridFsStorage({
 const upload = multer({ storage})
 
 
-router.get("/", (req, res) => {
-    res.render("index")
-})
-
-//@route post /uploads
-//@desc uploads the file to database 
-router.post('/upload', upload.single('file'), (req, res) =>{
+/**
+ * @route post /documents
+ * @description post method to upload files
+ * @access public 
+ */
+router.post('/', upload.single('file'), (req, res) =>{
 
     //res.json({ file: req.file})
    
@@ -57,10 +58,12 @@ router.post('/upload', upload.single('file'), (req, res) =>{
 
 
 
-/**route GET /files
- * @desc method to get all the files in the json format 
+/**
+ * route GET /files
+ * @desc get method to reterive the file in json format
+ * for testing in postman
  */
-router.get('/getAllFiles',(req, res)=>{
+router.get('/',(req, res)=>{
     gfs.files.find().toArray((err, files)=>{
         //checl if files exists
         if(!files || files.length === 0){
@@ -75,11 +78,12 @@ router.get('/getAllFiles',(req, res)=>{
 });
 
 /**
- * router files/:filename
- * @description method to fetch the particular file using the filename in json format
- *    (display single file)
+ * @route /:filename
+ * @desc get method to reterive the single file based on filename.
+ * @access public 
+ * testing in postman only  
  */
-router.get('/getByFilename/:filename', (req, res) => {
+router.get('/:filename', (req, res) => {
     gfs.files.findOne({ filename: req.param.filename}, (err, file) => {
         //checking if file exists
         if(!files || files.length === 0){
@@ -94,8 +98,9 @@ router.get('/getByFilename/:filename', (req, res) => {
 })
 
 /**
- * router files/:filename
- * @description method to download the particular file using the filename 
+ * router /:filename
+ * @description get method to download file based on filename 
+ * @access public
  */
 router.get("/files/:filename", (req, res) => {
     gfs.files.findOne({ filename: req.params.filename}, (err, file)=> {
