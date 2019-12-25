@@ -2,14 +2,16 @@
 
 const express = require("express");
 const connectDB = require("./config/db");
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
+// const multer = require('multer');
+// const GridFsStorage = require('multer-gridfs-storage');
+// const Grid = require('gridfs-stream');
 var cors = require("cors");
 
 // routes
-//const books = require("./routes/api/books");
-const documents = require("./routes/api/document");
+const branches = require("./routes/api/branches");
+const patients = require("./routes/api/patients");
+const doctors = require("./routes/api/doctors");
+const patientBasicInfo = require("./routes/api/patientBasicInformations");
 
 const app = express();
 
@@ -22,11 +24,11 @@ app.use(cors({ origin: true, credentials: true }));
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-app.get("/", (req, res) => res.send("Hello world!"));
-
 // use Routes
-//app.use("/api/books", books);
-app.use("/api/uploads", documents);
+app.use("/branches", branches);
+app.use("/patients", patients);
+app.use("/doctors", doctors);
+app.use("/patientBasicInfo", patientBasicInfo);
 
 const port = process.env.PORT || 8082;
 

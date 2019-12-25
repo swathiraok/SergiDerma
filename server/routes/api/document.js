@@ -22,7 +22,7 @@ conn.once('open',() => {
 });
 
 //create a storage engine s
-const storage = GridFsStorage({
+const storage = GridFsStorage({ 
     url: mongoURI,
     file: (req, file) =>{
         return new Promise((resolve, reject) =>{
@@ -40,42 +40,27 @@ const storage = GridFsStorage({
 
 const upload = multer({ storage})
 
-/*
-//@route post /uploads
-//@desc uploads the file to database 
-//router.post('/upload', upload.single('file'), (req, res) =>{
-router.post('/upload', (req, res) =>{
-    upload.single(req, res, function(err){
-        if(err){
-            return res.status(404).json({ message: "error in uploading file"});
-        }
-        res.json({ message : "file uploaded successful"});
-    });
-});
-*/
+
+router.get("/", (req, res) => {
+    res.render("index")
+})
 
 //@route post /uploads
 //@desc uploads the file to database 
 router.post('/upload', upload.single('file'), (req, res) =>{
+
+    //res.json({ file: req.file})
    
     return res.json("file uploaded successfully!..")
-})
-/*
-//@route post /uploads
-//@desc uploads the file to database 
-router.post('/upload', upload.single('file'), (req, res, function(err){
-    if (err) {
-        return res.status(404).json({ message: 'error in uploading file'});
-    }
-    res.json({ message: 'file uploaded successfully '})
-    
-}));
-*/
+});
+
+
+
 
 /**route GET /files
- * @desc method to Display all the files in the json format 
+ * @desc method to get all the files in the json format 
  */
-router.get('/files',(req, res)=>{
+router.get('/getAllFiles',(req, res)=>{
     gfs.files.find().toArray((err, files)=>{
         //checl if files exists
         if(!files || files.length === 0){
@@ -89,4 +74,39 @@ router.get('/files',(req, res)=>{
     });
 });
 
-module.exports = router;
+/**
+ * router files/:filename
+ * @description method to fetch the particular file using the filename in json format
+ *    (display single file)
+ */
+router.get('/getByFilename/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.param.filename}, (err, file) => {
+        //checking if file exists
+        if(!files || files.length === 0){
+            return res.status(404).json({
+                err:'no file exists in that name'
+            });
+        }
+        //file exists
+        return res.json(file)
+
+    })
+})
+
+/**
+ * router files/:filename
+ * @description method to download the particular file using the filename 
+ */
+router.get("/files/:filename", (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename}, (err, file)=> {
+        //checking if file exists
+        if(!files || files.length === 0){
+            return res.status(404).json({ 
+                err: "no files exists"
+        });
+    }
+    gfs.openDownloadStreamByName(req.params.filename)
+});
+});
+
+module.exports = router;    
