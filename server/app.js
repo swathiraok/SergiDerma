@@ -12,6 +12,9 @@ const branches = require("./routes/api/branches");
 const patients = require("./routes/api/patients");
 const doctors = require("./routes/api/doctors");
 const patientBasicInfo = require("./routes/api/patientBasicInformations");
+const clinicServices = require("./routes/api/clinicService");
+const specialization = require("./routes/api/specialization");
+const appointmentType = require("./routes/api/appointmentType");
 
 const app = express();
 
@@ -29,6 +32,9 @@ app.use("/branches", branches);
 app.use("/patients", patients);
 app.use("/doctors", doctors);
 app.use("/patientBasicInfo", patientBasicInfo);
+app.use("/clinicService", clinicServices);
+app.use("/specialization", specialization);
+app.use("/appntType",appointmentType)
 
 const port = process.env.PORT || 8082;
 

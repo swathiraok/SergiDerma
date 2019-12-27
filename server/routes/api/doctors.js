@@ -46,7 +46,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(422).jsonp(errors.array());
     } else {
-      Doctor.create(req.body)
+      Doctor.create(req.body) 
         .then(doctors => res.json({ message: "Doctor profile saved successfully.." }))
         .catch(err => res.status(500).json(err));
     }
