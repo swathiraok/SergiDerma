@@ -2,16 +2,14 @@
 
 const express = require("express");
 const connectDB = require("./config/db");
-// const multer = require('multer');
-// const GridFsStorage = require('multer-gridfs-storage');
-// const Grid = require('gridfs-stream');
 var cors = require("cors");
 
 // routes
-const branches = require("./routes/api/branches");
-const patients = require("./routes/api/patients");
-const doctors = require("./routes/api/doctors");
-const patientBasicInfo = require("./routes/api/patientBasicInformations");
+const clinicAdd = require("./routes/api/clinicAddr");
+const clinicTiming = require("./routes/api/clinicTiming");
+const clinicHolyday = require("./routes/api/clinicHolyday");
+const leaveCalender = require("./routes/api/leaveCalender");
+const doctorInfor = require("./routes/api/doctorInfor");
 
 const app = express();
 
@@ -24,11 +22,16 @@ app.use(cors({ origin: true, credentials: true }));
 // Init Middleware
 app.use(express.json({ extended: false }));
 
+app.get("/", (req, res) => res.send("Hello world!"));
+
 // use Routes
-app.use("/branches", branches);
-app.use("/patients", patients);
-app.use("/doctors", doctors);
-app.use("/patientBasicInfo", patientBasicInfo);
+app.use("/api/clinicaddr",clinicAdd);
+app.use("/api/clinicTiming",clinicTiming);
+app.use("/api/clinicholyday",clinicHolyday);
+app.use("/api/leaveCalender",leaveCalender);
+app.use("/api/doctorInfo",doctorInfor);
+
+
 
 const port = process.env.PORT || 8082;
 
