@@ -15,6 +15,7 @@ const patientBasicInfo = require("./routes/api/patientBasicInformations");
 const clinicServices = require("./routes/api/clinicService");
 const specialization = require("./routes/api/specialization");
 const appointmentType = require("./routes/api/appointmentType");
+const appointmentState = require("./routes/api/appointmentState");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/patientBasicInfo", patientBasicInfo);
 app.use("/clinicService", clinicServices);
 app.use("/specialization", specialization);
 app.use("/appntType",appointmentType)
+app.use("/appntState",appointmentState);
 
 const port = process.env.PORT || 8082;
 

@@ -27,11 +27,11 @@ function(req, res) {
     const errors = validationResult(req);
     console.log(req.body);
     if(!errors.isEmpty()) {
-        return res.status(422).jsonp(errors.array());
+        return res.status(400).jsonp(errors.array());
     }else{
         AppointmnetType.create(req.body)
          .then(specializations =>res.json({ message: 'Appointment type  saved successfully'}))
-         .catch(err => res.status(400).json(err));
+         .catch(err => res.status(500).json({message: err.message || " Internal server error"}));
         }
     }
 );
@@ -44,19 +44,10 @@ function(req, res) {
 router.get("/", (req, res) => {
     AppointmnetType.find()
         .then(appointments => res.json(appointments))
-        .catch(err => res.json(err))
-});
-
-/**
- * @route GET /:id 
- * @description view the specialization by id 
- * @access public 
- * not mandatory just test purpose 
- */
-router.get("/:id", (req, res) =>{
-    AppointmnetType.findById(req.params.id)
-        .then(appointments => res.json(appointments))
-        .catch(err => res.status(404).json(err))
+        .catch(err => {
+            res.status(500).json({ message : err.message || " Internal server erroe"});
+        })
+   
 });
 
 /**
@@ -65,10 +56,24 @@ router.get("/:id", (req, res) =>{
  * @access public
  */
 router.put("/:id",async function(req, res){
+
+    //validate the request
+    if(!req.body){
+        return res.status(400).json({message: "request body cannot be empty"});
+    }
+    //find the appointment type by id and update it 
     AppointmnetType.findByIdAndUpdate(req.params.id, req.body)
-        .then(appointments => res.json({ message: "updated appointment type  successfully "}))
-        .catch(err => res.status(404).json({error: "appointment type not found  not found"}))
-
-
+        .then(appointments => {
+            if(!appointments){
+                return res.status(404).json({ message:" appointment type not found with id " +req.params.id})
+            }
+            return res.json({ message :" appointment data updated successfully"});
+        })
+        .catch(err => {
+            if(err.kind === 'objectId'){
+                return res.status(404).json({ message: " appointment type not found with id" + req.params.id})
+            }
+            return res.status(500).json({ message: "Error in updating the appointment type" + req.params.id})
+        })
 });
 module.exports = router;

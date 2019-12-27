@@ -24,11 +24,11 @@ function(req, res) {
     const errors = validationResult(req);
     console.log(req.body);
     if(!errors.isEmpty()) {
-        return res.status(422).jsonp(errors.array());
+        return res.status(400).jsonp(errors.array());
     }else{
         Specialization.create(req.body)
          .then(specializations =>res.json({ message: 'specialization saved successfully'}))
-            .catch(err => res.status(404).json(err));
+            .catch(err => res.status(500).json({ message:err.message || " Internal server error"}));
         }
     }
 );
@@ -41,18 +41,9 @@ function(req, res) {
 router.get("/", (req, res) => {
     Specialization.find()
         .then(specializations => res.json(specializations))
-        .catch(err => res.json(err))
-});
-
-/**
- * @route GET /:id 
- * @description view the specialization by id 
- * @access public 
- */
-router.get("/:id", (req, res) =>{
-    Specialization.findById(req.params.id)
-        .then(specializations => res.json(specializations))
-        .catch(err => res.status(404).json(err))
+        .catch(err => {
+            res.status(500).json({ message : err.message || "Internal server error"})
+        })
 });
 
 /**
@@ -61,9 +52,25 @@ router.get("/:id", (req, res) =>{
  * @access public
  */
 router.put("/:id",async function(req, res){
+
+    //validate the request
+    if(!req.body){
+        return res.status(400).json({ message : "request body cannot be empty"});
+    }
+    //find the clinic specs by Id and update it 
     Specialization.findByIdAndUpdate(req.params.id, req.body)
-        .then(specializations => res.json({ message: "updated specialization successfully "}))
-        .catch(err => res.status(404).json({error: "patient not found"}))
+        .then(specializations => {
+            if(!specializations){
+                return res.status(404).json({ message : "specialization not found with id" + req.params.id });
+            }
+            return res.json({message: "specialization data updated successfully"});
+        })
+        .catch(err => {
+            if(err.kind === 'objectId'){
+                return res.status(404).json({ message : "service not found with id" + req.params.id })
+            }
+            return res.status(500).json({ message : "Error in updating with id" + req.params.id})
+        })
 
 
 });
