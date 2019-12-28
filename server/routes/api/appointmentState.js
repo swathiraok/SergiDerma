@@ -55,12 +55,13 @@ router.put("/:id", async function(req, res){
 
     //validate the request
     if(!appointments){
-        return res.status(404).json({ message : " appointment state note found with id " + req.params.id});
+        return res.status(400).json({ message : " request body cannot be empty " + req.params.id});
     }
     
-    //find the appointment state by Id  and update it 
+    //finding the appointment state by Id  and update it 
     AppointmnetState.findByIdAndUpdate(req.params.id, req.body)
-        .then(appointments => {
+        .then(appointments =>
+            {
             if(!appointments){
                 return res.status(404).json({ message: "appointments state not found with id" +req.params.id});
             }
@@ -73,4 +74,6 @@ router.put("/:id", async function(req, res){
             return res.status(500).json({ message : "Error in updating with this id " +req.params.id})
         })
 });
+
+
 module.exports = router;

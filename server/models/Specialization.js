@@ -5,7 +5,6 @@ const nanoid = require("nanoid");
 const SpecilizationSchema = new mongoose.Schema({
     cd :{
         type:String,
-        default :() => "splzation" + nanoid(3),
         required: true
     },
     name:{

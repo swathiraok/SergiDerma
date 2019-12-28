@@ -5,7 +5,6 @@ const nanoid = require("nanoid");
 const ClinicServiceSchema = new mongoose.Schema({
     cd: {
         type: String,
-        default : () => "cService" + nanoid(3),
         required: true
     },
     Type: {
