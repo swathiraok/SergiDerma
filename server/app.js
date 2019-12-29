@@ -2,6 +2,7 @@
 
 const express = require("express");
 const connectDB = require("./config/db");
+const logger = require("./config/logger")
 // const multer = require('multer');
 // const GridFsStorage = require('multer-gridfs-storage');
 // const Grid = require('gridfs-stream');
@@ -40,4 +41,5 @@ app.use("/appntState",appointmentState);
 
 const port = process.env.PORT || 8082;
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`)});
