@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {check, validationResult} = require('express-validator/check');
+const { handleError,ValidaError } = require('../../CenterErrorHandle/error')
 
 //load patientBasicInfor model
 const DoctorInform = require("../../models/DoctorInfo");
@@ -36,13 +37,12 @@ router.post("/addDoctorInfor/",[
 ],
 async function(req,res){
     //validation check
+    console.log("triger data...")
     const errors=validationResult(req);
     console.log(req.body);
     if(!errors.isEmpty()){
         return res.status(422).jsonp(errors.array());
     }else{
-    
-    
         DoctorInform.create(req.body)
         .then(result => res.json({id:result.docid,
                                    message: "doctor info added successfully..",
@@ -59,16 +59,21 @@ async function(req,res){
 /* 
     parameter id:doctor id
 */
-router.put("/updateDoctorInform", async function(req,res) {
+router.put("/updateDoctorInform", async function(req,res,next) {
     
   await DoctorInform.findOneAndUpdate({docid:req.query.id},req.body,{new: true}, function(err,result) {
-       if(err)
-       res.status(500).json(err);
-       else
-       if(result==null)
-       res.status(404).json({error:"Unable to found"})
-       else
-       res.json(result)
+    try {
+        if(err)
+        res.status(500).json(err);
+        else
+        if(result==null)
+        throw new ValidaError(404,"Unable to find!!")
+      //  res.status(404).json({error:"Unable to found"})
+        else
+        res.json(result)
+    } catch (error) {
+        next(error) 
+    }   
    });
 });
 
@@ -81,24 +86,45 @@ router.put("/updateDoctorInform", async function(req,res) {
     skips:1, //option
     limits:1 //option
 */
-router.get("/getDoctorInform",(req,res) =>{
-
+router.get("/getDoctorInform", (req,res,next) =>{
+  
+    console.log("")
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
-
     console.log("skip",skipPage)
     console.log("query",req.query)
-    DoctorInform.find({docid:req.query.id},function(err,result){
-        if(err)
-        res.status(500).json(err)
-        else
-        if(result.length==0)
-        res.status(400).json({error:"Unable to find"})
-        else
-        res.json(result)
+         DoctorInform.find({docid:req.query.id},  function(err,result){       
+           try {
+            if(err)
+            throw new ValidaError(500,err);
+            if(result.length==0)
+            throw new ValidaError(400, 'Unable to find');
+            else
+            res.json(result)
+            next()
+            } catch (error) {
+                next(error);
+               // res.json(error)
+            }
+                
     }).skip(skipPage).limit(limitPage)
+
 });
 
+
+router.get("/getAll",function( req, res ){
+    req.pipe( request({
+        url: config.backendUrl + req.params[0],
+        qs: req.query,
+        method: req.method
+    }))
+    .on('error', err => {
+        const msg = 'Error on connecting to the webservice.';
+        console.error(msg, err);
+        res.status(500).send(msg);
+    })
+    .pipe( res );
+});
 
 
 

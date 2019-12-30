@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {check, validationResult} = require('express-validator/check');
-
+const { handleError,ValidaError } = require('../../CenterErrorHandle/error')
 //load patientBasicInfor model
 const ClinicAddr = require("../../models/ClinicAddr");
 
@@ -32,7 +32,8 @@ router.post("/addClinicAdd/",[
 
     //check('pntnHabit','Your email id is not valid').not().isEmpty()
 ],
-async function(req,res){
+async function(req,res,next){
+    console.log("triger data...")
     //validation check
     const errors=validationResult(req);
     console.log(req.body);
@@ -44,24 +45,28 @@ async function(req,res){
         var checkEmailAndPhone=await ClinicAddr.findOne({'cntactDtls.PrimPhnNum':req.body.cntactDtls.PrimPhnNum});
         //var checkEmailAndPhone=await ClinicAddr.findOne({'cntactDtls.EmlAddr':req.body.cntactDtls.EmlAddr});
         /* check email and phone already exit in db */
-        if(checkEmailAndPhone!=null)
-            res.json({message:"phone number already exit.."});
-        else if(checkEmailAndEmail!=null)
-            res.json({message:"Email id already exit.."})
-        else
-        ClinicAddr.create(req.body)
-        .then(clinicAdd => res.json({id:clinicAdd.ClinId,
+        try {
+            if(checkEmailAndPhone!=null)
+            throw new ValidaError(422,"phone number already exit..")
+            else if(checkEmailAndEmail!=null)
+            throw new ValidaError(422,"Email id already exit..")
+            else
+            ClinicAddr.create(req.body)
+           .then(clinicAdd => res.json({id:clinicAdd.ClinId,
                                    message: "ClinicAddress added successfully..",
                                    status:"200" }))
-        .catch(err =>res.status(500).json(err))
-
-        }    
-    
+           .catch(err =>res.status(500).json(err))        
+        } catch (error) {
+            next(error)
+        }
+    }    
+         
 });
 
 /* @route PUT api?ClinicAddr
    @description add/save ClinicAddr detail
-   access public
+   @access public
+   @param id:clicId
  */
 
  router.put("/updateClinicAdd",[
@@ -78,7 +83,7 @@ async function(req,res){
     check('locdtls','clinic locdtls is required!!').not().isEmpty(),
     check('cntactDtls.website','clinic website is required!!').not().isEmpty()
     //check('pntnHabit','Your email id is not valid').not().isEmpty()
-],async function(req,res) {
+],async function(req,res,next) {
 
 //validation check
 const errors=validationResult(req);
@@ -86,7 +91,16 @@ const errors=validationResult(req);
         return res.status(422).jsonp(errors.array());
     }else{
        await ClinicAddr.findOneAndUpdate({ClinId:req.query.id},req.body)
-                   .then(result =>res.json({message:"Update successfully"}))
+                   .then(result =>{
+                       try {
+                           if(result==null)
+                           throw new ValidaError(404,"Unable to find " +req.query.id);
+                           else
+                           res.json(result);
+                       } catch (error) {
+                           next(error);
+                       }
+                   })
                    .catch(err =>res.json(err));    
     }            
  });
@@ -100,7 +114,7 @@ const errors=validationResult(req);
     skips:1, //option
     limits:1 //option
 */
-router.get("/getClinicAllAddress",(req,res) =>{
+router.get("/getClinicAllAddress",(req,res,next) =>{
 
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
@@ -108,7 +122,17 @@ router.get("/getClinicAllAddress",(req,res) =>{
     console.log("skip",skipPage)
     console.log("query",req.query)
     ClinicAddr.find().skip(skipPage).limit(limitPage)
-            .then(result =>res.json(result))
+            .then(result =>{
+                try {
+                    if(result.length==0)
+                    throw new ValidaError(400, 'Unable to find');
+                    else
+                    res.json(result)
+                    next()
+                } catch (error) {
+                    next()
+                }
+            })
             .catch(err =>res.json(err));
 });
 

@@ -54,7 +54,6 @@ const ClinicAddrSchema=new mongoos.Schema({
             type:String
         }
     },
-    
     locdtls:{
         type:JSON,
         require:true

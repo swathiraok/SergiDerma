@@ -1,5 +1,6 @@
 const mongoos=require('mongoose');
-
+const mongooseFieldEncryption = require("mongoose-field-encryption").fieldEncryption;
+var keyString = "hpXa6pTJOWDAClC/J6POVTjvJpMIiPAMQiTMjBrcOGw=";
 
 const DoctorSchema=new mongoos.Schema({
     docid:{
@@ -80,4 +81,6 @@ const DoctorSchema=new mongoos.Schema({
 },{
     timestamps:true
 });
+DoctorSchema.plugin(mongooseFieldEncryption, { fields: ["fname","mname","lname","dob","email", "addrIn1","addrIn2","contdtls"], secret: keyString });
+
 module.exports=mongoos.model('DoctorInfor',DoctorSchema)

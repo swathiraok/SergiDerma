@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {check, validationResult} = require('express-validator/check');
+const { handleError,ValidaError } = require('../../CenterErrorHandle/error')
 
 //load patientBasicInfor model
 const ClinicTiming = require("../../models/ClinicTiming");
@@ -45,16 +46,21 @@ async function(req,res){
 //@route PUT api/ClinicTiming
 //@description update clinic timing 
 //public access
-router.put("/updateClinicTiming", async function(req,res) {
+router.put("/updateClinicTiming", async function(req,res,next) {
 
   await ClinicTiming.findOneAndUpdate({day:req.query.day},req.body,{new: true}, function(err,result) {
-       if(err)
-       res.status(500).json(err);
-       else
-       if(result==null)
-       res.status(404).json({error:"Unable to found"})
-       else
-       res.json(result)
+      try {
+        if(err)
+        res.status(500).json(err);
+        else
+        if(result==null)
+        throw new ValidaError(404,"Unable to find " +req.query.day)
+        else
+        res.json(result)
+      } catch (error) {
+          next(error)
+      }
+      
    });
 });
 
@@ -67,7 +73,7 @@ router.put("/updateClinicTiming", async function(req,res) {
     skips:1, //option
     limits:1 //option
 */
-router.get("/getClinicTiming",(req,res) =>{
+router.get("/getClinicTiming",(req,res,next) =>{
 
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
@@ -75,13 +81,18 @@ router.get("/getClinicTiming",(req,res) =>{
     console.log("skip",skipPage)
     console.log("query",req.query)
     ClinicTiming.find({ClinId:req.query.id},function(err,result){
+        try {
         if(err)
         res.status(500).json(err)
         else
         if(result.length==0)
-        res.status(400).json({error:"Unable to find"})
+        throw new ValidaError(400,"unable to find "+req.query.id);
         else
         res.json(result)
+        } catch (error) {
+            next(error)
+        }
+        
     }).skip(skipPage).limit(limitPage)
 });
 
