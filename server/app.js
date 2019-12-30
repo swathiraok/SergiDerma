@@ -28,6 +28,15 @@ app.use(cors({ origin: true, credentials: true }));
 
 // Init Middleware
 app.use(express.json({ extended: false }));
+app.use((req, res, next) => {
+    logger.info(req.body);
+    let oldSend = res.send;
+    res.send = function(data){
+        logger.info(JSON.parse(data));
+        oldSend.apply(res, arguments);
+    }
+    next();
+})
 
 // use Routes
 app.use("/branches", branches);
@@ -42,4 +51,4 @@ app.use("/appntState",appointmentState);
 const port = process.env.PORT || 8082;
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`)});
+    logger.log(`Server running on port ${port}`)});
