@@ -1,40 +1,40 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    outline: 0 none;
-    font-family: Arial, Helvetica, sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0 none;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .topspacing {
-    margin: 7% auto 1%;
-    h5{
-        color: #3f51b5;
-        padding-bottom: 20px;
+  margin: 7% auto 1%;
+  h5 {
+    color: #3f51b5;
+    padding-bottom: 20px;
+  }
+  h4 {
+    width: 100%;
+    line-height: 1.5em;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #9a338e;
+  }
+  div {
+    padding-left: 0;
+    margin-bottom: 20px;
+  }
+  .form-group {
+    .form-check {
+      input {
+        margin-left: 0px;
+      }
+      label {
+        margin-bottom: 0;
+        padding-right: 50px;
+        padding-left: 20px;
+      }
     }
-    h4{
-        width: 100% ;
-        line-height: 1.5em;
-        padding: 15px 0;
-        font-size: 18px;
-        color: #9A338E;
-    }
-    div{
-        padding-left: 0;
-        margin-bottom: 20px;
-    }
-    .form-group{
-        .form-check{
-            input{
-                margin-left: 0px;
-            }
-            label{
-                margin-bottom: 0;
-                padding-right: 50px;
-                padding-left: 20px;
-            }
-        }
-    }
-.tiles{
+  }
+  .tiles {
     width: 20%;
     height: 150px;
     background-position: center;
@@ -50,86 +50,95 @@
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     font-size: 18px;
     line-height: 1.5em;
-    
-}
-.profileWrap{
+  }
+  .profileWrap {
     width: 45%;
     margin: 2.5%;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     padding: 10px;
-    h6{
-        min-height: 38px;
-        font-weight: normal;
+    h6 {
+      min-height: 38px;
+      font-weight: normal;
     }
-    
-}
-.svgIconWrap{
+  }
+  .svgIconWrap {
     position: fixed;
-    top: 80% ;
+    top: 80%;
     right: 1%;
-    a{
-        &:hover{
-            background: #1E56FD;
-            color: #FFF;
-        }
+    a {
+      &:hover {
+        background: #1e56fd;
+        color: #fff;
+      }
     }
-}
-.form-control{
+  }
+  .form-control {
     border: 0;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
-    &:focus{
-        box-shadow: none;
-        border-bottom-color: #3f51b5;
+    &:focus {
+      box-shadow: none;
+      border-bottom-color: #3f51b5;
     }
-}
-.checkboxgroup{
-    label{
-        padding-right: 5%;
-    min-width: 270px;
-        input{
-            float: left;
-        margin-top: 6px;
-        margin-right: 15px;
+  }
+  .checkboxgroup {
+    ul {
+      width: 100%;
+      li {
+        list-style: none;
+        width: 25%;
+        float: left;
+        padding-bottom: 10px;
+        label {
+          padding-right: 5%;
+          min-width: 270px;
         }
-    }
-    
-}
-}
-.headerWrap{
-    border-bottom: 1px solid #d6d6d6;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    z-index: 1;
-    .imgWrap{
-        img{
-            width: 35%;
+        input {
+          float: left;
+          margin-top: 6px;
+          margin-right: 15px;
         }
+      }
     }
-    h3{
-        margin-top: 20px;
-        color: #3f51b5;
-        font-weight: 600;
-    }
+  }
 }
-.footerWrap{
-    width: 100%;
-    float: left;
-    padding: 10px;
-    background-color: #f4f4f4;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    img{
-        width: 20%;
-        float: right;
+.headerWrap {
+  border-bottom: 1px solid #d6d6d6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 1;
+  .imgWrap {
+    img {
+      width: 35%;
     }
+  }
+  h3 {
+    margin-top: 20px;
+    color: #3f51b5;
+    font-weight: 600;
+  }
+}
+.footerWrap {
+  width: 100%;
+  float: left;
+  padding: 10px;
+  background-color: #f4f4f4;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  img {
+    width: 20%;
+    float: right;
+  }
 }
 
 /* To fix this: https://github.com/twbs/bootstrap/issues/10152 */
-[class*=col-] + .col-xs-12, [class*=col-] + .col-sm-12, [class*=col-] + .col-md-12, [class*=col-] + .col-lg-12 {
-    float: left;
-    width: 100%;
+[class*="col-"] + .col-xs-12,
+[class*="col-"] + .col-sm-12,
+[class*="col-"] + .col-md-12,
+[class*="col-"] + .col-lg-12 {
+  float: left;
+  width: 100%;
 }

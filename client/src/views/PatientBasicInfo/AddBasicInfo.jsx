@@ -27,55 +27,57 @@ class AddBasicInfo extends Component {
       alcohol_consumption: "",
       caffeine_consumption: "",
       do_you_smoke: "",
-      ptNote: "",
-      checkedItems: new Map()
+      ptNote: ""
     };
-    this.handleChange = this.handleChange.bind(this);
     this.onChange = this.onChange.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-  handleChange(e) {
-    const item = e.target.name;
-    const isChecked = e.target.checked;
-    this.setState(prevState => ({
-      checkedItems: prevState.checkedItems.set(item, isChecked)
-    }));
+  onToggle(index, e) {
+    let newItems = allergies.slice();
+    newItems[index].checked = !newItems[index].checked;
+    console.log("newItems are:::" + newItems);
+    this.setState({
+      ptAllergies: newItems
+    });
   }
 
   onSubmitData = e => {
     console.log("inside submit");
     e.preventDefault();
     const data = {
+      ptId: "1234",
       ptHeight: this.state.ptHeight,
       ptWeight: this.state.ptWeight,
       ptBMI: this.state.ptBMI,
       ptBloodGroup: this.state.ptBloodGroup,
       ptInsurance: {
-      sub_name: this.state.sub_name,
-      sub_DOB: this.state.sub_DOB,
-      rel_to_sub: this.state.rel_to_sub,
-      emp_name: this.state.emp_name,
-      emp_phone: this.state.emp_phone,
-      occupation: this.state.occupation
+        sub_name: this.state.sub_name,
+        sub_DOB: this.state.sub_DOB,
+        rel_to_sub: this.state.rel_to_sub,
+        emp_name: this.state.emp_name,
+        emp_phone: this.state.emp_phone,
+        occupation: this.state.occupation
       },
       ptAllergies: this.state.ptAllergies,
       ptAnyOperation: this.state.ptAnyOperation,
       ptCurrentMedications: this.state.ptCurrentMedications,
       ptHabit: {
-      exercise: this.state.exercise,
-      eating_following_a_diet: this.state.eating_following_a_diet,
-      alcohol_consumption: this.state.alcohol_consumption,
-      caffeine_consumption: this.state.caffeine_consumption,
-      do_you_smoke: this.state.do_you_smoke
+        exercise: this.state.exercise,
+        eating_following_a_diet: this.state.eating_following_a_diet,
+        alcohol_consumption: this.state.alcohol_consumption,
+        caffeine_consumption: this.state.caffeine_consumption,
+        do_you_smoke: this.state.do_you_smoke
       },
       ptNote: this.state.ptNote
     };
 
-    axios.post("http://139.59.3.138:8082/patientBasicInfo/", data)
+    axios
+      .post("http://139.59.3.138:8082/patientBasicInfo/", data)
       .then(res => {
         this.setState({
+          ptId: "1234",
           ptHeight: "",
           ptWeight: "",
           ptBMI: "",
@@ -88,7 +90,7 @@ class AddBasicInfo extends Component {
             emp_phone: "",
             occupation: ""
           },
-          ptAllergies: "",
+          ptAllergies: [],
           ptAnyOperation: "",
           ptCurrentMedications: "",
           ptHabit: {
@@ -223,7 +225,6 @@ class AddBasicInfo extends Component {
                     />
                   </div>
                 </div>
-               
 
                 <div className="col-md-4 float-left">
                   <div className="form-group">
@@ -254,21 +255,20 @@ class AddBasicInfo extends Component {
                   <div>
                     <h4>Medical History</h4>
                   </div>
-                  <div className="float-left checkboxgroup">
+                  <div className="checkboxgroup">
                     <div className="form-group">
-                      <React.Fragment>
-                        {allergies.map(item => (
-                          <label key={item.key}>
+                      <ul>
+                        {allergies.map((item, i) => (
+                          <li key={i}>
                             {item.name}
-                            <Checkbox
-                              name={item.name}
-                              checked={this.state.checkedItems.get(item.name)}
-                              onChange={this.handleChange}
-                              value={this.state.ptAllergies}
+                            <input
+                              type="checkbox"
+                              onChange={this.onToggle.bind(this, i)}
+                              value={item.value}
                             />
-                          </label>
+                          </li>
                         ))}
-                      </React.Fragment>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -611,13 +611,15 @@ class AddBasicInfo extends Component {
                   </div>
                 </div>
                 <div className="col-md-12">
-            <div className="col-md-2  float-right">
-              <input type="submit" className="btn btn-success btn-block" />
-            </div>
-            </div>
+                  <div className="col-md-2  float-right">
+                    <input
+                      type="submit"
+                      className="btn btn-success btn-block"
+                    />
+                  </div>
+                </div>
               </form>
             </div>
-            
           </div>
         </div>
       </div>
