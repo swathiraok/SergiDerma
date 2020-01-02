@@ -1,169 +1,110 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-// import 'index.scss';
-import Checkbox from '../../components/Checkbox';
+import React, { Component } from "react";
+import axios from "axios";
+import "index.scss";
+import Checkbox from "../../components/Checkbox";
 import { allergies } from "../../data/allergies.js";
-// import Input from '../../components/Input';
 
-// {
-// 	"ptId":"12345",
-//     "ptHeight":"5'2",
-//     "ptWeight":"55",
-//     "ptBMI":"43",
-//     "ptHealthIssue":"aller",
-//     "ptInsurance":{
-//     	"sub_name":"abcd",
-//         "sub_DOB":"12/12/2019",
-//         "rel_to_sub":"father",
-//         "emp_name":"unknow",
-//         "emp_phone":"1234567890",
-//         "occupation":"employee"},
-//     "ptBloodGroup":"a",
-//     "ptAllergies":[{
-//     	"name":"Anemia"
-//     },{
-//     	"name":"Unknow"
-//     }],
-//     "ptAnyOperation":"yes",
-//     "ptCurrentMedications":"dia",
-//     "ptHabit":{
-//     	"exercise":{
-//     		"day":"never"
-//     	},
-//     	"eating_following_a_diet":{
-//     		"diet":"i have a loose diet"
-//     	},
-//     	"alcohol_consumption":{
-//     		"day":"i don't drink"
-//     	},
-//     	"caffeine_consumption":{
-//     		"day":"1-2cup/day"
-//     	},
-//     	"do you smoke":{
-//     		"day":"no"
-//     	}
-//     },
-//     "ptNote":"kjsdk"
-// }
 class AddBasicInfo extends Component {
   constructor() {
-    console.log('allergies' +allergies);
+    console.log("allergies" + allergies);
     super();
     this.state = {
-            ptHeight: '',
-            ptWeight: '',
-            ptBMI: '',
-            ptHealthIssue: '',
-            ptInsurance: {
-              sub_name:'',
-              sub_DOB: '',
-              rel_to_sub: '',
-              emp_name: '',
-              emp_phone: '',
-              occupation: '',
-              ptBloodGroup: ''
-            },
-            ptAllergies: [],
-            ptAnyOperation: '',
-            ptCurrentMedications: '',
-            ptHabit: {
-              exercise: '',
-              eating_following_a_diet: '',
-              alcohol_consumption: '',
-              caffeine_consumption: '',
-              do_you_smoke: ''
-            },
-            ptNote: '',
-            checkedItems: new Map(),
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.onChange = this.onChange.bind(this);
+      ptHeight: "",
+      ptWeight: "",
+      ptBMI: "",
+      ptBloodGroup: "",
+      sub_name: "",
+      sub_DOB: "",
+      rel_to_sub: "",
+      emp_name: "",
+      emp_phone: "",
+      occupation: "",
+      ptAllergies: [],
+      ptAnyOperation: "",
+      ptCurrentMedications: "",
+      exercise: "",
+      eating_following_a_diet: "",
+      alcohol_consumption: "",
+      caffeine_consumption: "",
+      do_you_smoke: "",
+      ptNote: "",
+      checkedItems: new Map()
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  };
+  }
   handleChange(e) {
     const item = e.target.name;
     const isChecked = e.target.checked;
-    this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
+    this.setState(prevState => ({
+      checkedItems: prevState.checkedItems.set(item, isChecked)
+    }));
   }
-  //  handleInput(e) {
-  //    let value = e.target.value;
-  //   let name = e.target.name;
-  //   this.setState(
-  //     prevState => ({
-  //       newPatient: {
-  //         ...prevState.newPatient,
-  //         [name]: value
-  //       }
-  //     }),
-  //     () => console.log(this.state.newPatient)
-  //   );
-  // }
-  // handleCheckBox(e) {
-  //   const newSelection = e.target.value;
-  //   let newSelectionArray;
 
-  //   if (this.state.newPatient.type.indexOf(newSelection) > -1) {
-  //     newSelectionArray = this.state.newPatient.type.filter(
-  //       s => s !== newSelection
-  //     );
-  //   } else {
-  //     newSelectionArray = [...this.state.newPatient.type, newSelection];
-  //   }
-
-  //   this.setState(prevState => ({
-  //       newPatient: { ...prevState.newPatient, type: newSelectionArray }
-  //   }));
-  // }
   onSubmit = e => {
+    console.log("inside submit");
     e.preventDefault();
-    // let PatientData = this.state.newPatient;
-    // fetch("http://localhost:8082/patients ", {
-    //   method: "POST",
-    //   body: JSON.stringify(PatientData),
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   }
-    // }).then(response => {
-    //   response.json().then(data => {
-    //     console.log("Successful" + data);
-    //   });
-    // });
+    const data = {
+      ptHeight: this.state.ptHeight,
+      ptWeight: this.state.ptWeight,
+      ptBMI: this.state.ptBMI,
+      ptBloodGroup: this.state.ptBloodGroup,
+      sub_name: this.state.sub_name,
+      sub_DOB: this.state.sub_DOB,
+      rel_to_sub: this.state.rel_to_sub,
+      emp_name: this.state.emp_name,
+      emp_phone: this.state.emp_phone,
+      occupation: this.state.occupation,
+      ptAllergies: this.state.ptAllergies,
+      ptAnyOperation: this.state.ptAnyOperation,
+      ptCurrentMedications: this.state.ptCurrentMedications,
+      exercise: this.state.exercise,
+      eating_following_a_diet: this.state.eating_following_a_diet,
+      alcohol_consumption: this.state.alcohol_consumption,
+      caffeine_consumption: this.state.caffeine_consumption,
+      do_you_smoke: this.state.do_you_smoke,
+      ptNote: this.state.ptNote
+    };
 
-    // const data = {
-    //   frstNm: this.state.frstNm,
-    //   mddlNm: this.state.mddlNm,
-    //   lstNm: this.state.lstNm,
-    //   gndr: this.state.gndr,
-    //   phnNm: this.state.phnNm,
-    //   dob: this.state.dob,
-    //   email: this.state.email,
-    //   type: this.state.type
-    // };
-
-    // axios
-    //   .post('http://localhost:8082/patients', data)
-    //   .then(res => {
-    //     this.setState({
-    //       frstNm: '',
-    //       mddlNm: '',
-    //       lstNm: '',
-    //       gndr: '',
-    //       phnNm: '',
-    //       dob: '',
-    //       email: '',
-    //       type: ''
-    //     })
-    //     this.props.history.push('/home');
-    //   })
-    //   .catch(err => {
-    //     console.log("Error in Patient Registration!");
-    //   })
+    axios.post("http://139.59.3.138:8082/patientBasicInfo/", data)
+      .then(res => {
+        this.setState({
+          ptHeight: "",
+          ptWeight: "",
+          ptBMI: "",
+          ptBloodGroup: "",
+          ptInsurance: {
+            sub_name: "",
+            sub_DOB: "",
+            rel_to_sub: "",
+            emp_name: "",
+            emp_phone: "",
+            occupation: ""
+          },
+          ptAllergies: [],
+          ptAnyOperation: "",
+          ptCurrentMedications: "",
+          ptHabit: {
+            exercise: "",
+            eating_following_a_diet: "",
+            alcohol_consumption: "",
+            caffeine_consumption: "",
+            do_you_smoke: ""
+          },
+          ptNote: ""
+        });
+        alert("Patient basic information saved successfully");
+        this.props.history.push("/");
+      })
+      .catch(err => {
+        console.log("Error in saving Patient information!");
+      });
   };
+
   render() {
-    
     return (
       <div className="topspacing">
         <div className="container">
@@ -172,197 +113,525 @@ class AddBasicInfo extends Component {
               <h5>Patient Basic Information details</h5>
 
               <form noValidate onSubmit={this.onSubmit}>
-                
-                  <div><h4>Physical Information</h4></div>
-                  <div className="col-md-4 float-left">
-                    <div className='form-group'>
-                      <input
-                        type='text'
-                        name='ptHeight'
-                        className='form-control'
-                        placeholder="Height"
-                        value={this.state.ptHeight}
-                        onChange={this.onChange}
-                      />
-                       {/* <Input
-                        inputType={"text"}
-                        name={"frstNm"}
-                        value={this.state.newPatient.frstNm}
-                        placeholder={"First Name"}
-                        handleChange={this.handleInput}
-                        /> */}
-                    </div>
-                  </div>
-                  <div className="col-md-4 float-left">
-                    <div className='form-group'>
-                      <input
-                        type='text'
-                        name='ptWeight'
-                        className='form-control'
-                        placeholder="Weight"
-                        value={this.state.ptWeight}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 float-left">
-                    <div className='form-group'>
+                <div>
+                  <h4>Physical Information</h4>
+                </div>
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
                     <input
-                        type='text'
-                        name='ptBMI'
-                        className='form-control'
-                        placeholder="BMI"
-                        value={this.state.ptBMI}
-                        onChange={this.onChange}
-                      />
-                  
-                    </div>
+                      type="text"
+                      name="ptHeight"
+                      className="form-control"
+                      placeholder="Height"
+                      value={this.state.ptHeight}
+                      onChange={this.onChange}
+                    />
                   </div>
-                
-               
-                  <div className="col-md-4">
-                    <div className='form-group'>
+                </div>
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
                     <input
-                        type='text'
-                        name='ptBloodGroup'
-                        className='form-control'
-                        placeholder="Blood Group"
-                        value={this.state.ptBloodGroup}
-                        onChange={this.onChange}
-                      />
-                    </div>
+                      type="text"
+                      name="ptWeight"
+                      className="form-control"
+                      placeholder="Weight"
+                      value={this.state.ptWeight}
+                      onChange={this.onChange}
+                    />
                   </div>
-                
-                
-                <div><h4>Insurance Information</h4></div>
-                  <div className="col-md-4 float-left">
-                    <div className='form-group'>
-                       <input
-                        type='text'
-                        name='sub_name'
-                        className='form-control'
-                        placeholder="Subscriber Name"
-                        value={this.state.ptInsurance.sub_name}
-                        onChange={this.onChange}
-                      />
-                    </div>
+                </div>
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      name="ptBMI"
+                      className="form-control"
+                      placeholder="BMI"
+                      value={this.state.ptBMI}
+                      onChange={this.onChange}
+                    />
                   </div>
-                  <div className="col-md-4 float-left">
-                    <div className='form-group'>
-                     <input
-                        type='date'
-                        name='sub_DOB'
-                        placeholder="Subscriber DOB"
-                        className='form-control'
-                        value={this.state.ptInsurance.sub_DOB}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 float-left">
-                    <div className='form-group'>
-                       <input
-                        type='text'
-                        name='rel_to_sub'
-                        className='form-control'
-                        placeholder="Relationship to subscriber"
-                        value={this.state.ptInsurance.rel_to_sub}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                  </div>
+                </div>
 
-                   <div className="col-md-4 float-left">
-                    <div className='form-group'>
-                       <input
-                        type='text'
-                        name='emp_name'
-                        className='form-control'
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      name="ptBloodGroup"
+                      className="form-control"
+                      placeholder="Blood Group"
+                      value={this.state.ptBloodGroup}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div>
+                    <h4>Insurance Information</h4>
+                  </div>
+                  <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="sub_name"
+                        className="form-control"
+                        placeholder="Subscriber Name"
+                        value={this.state.sub_name}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <input
+                        type="date"
+                        name="sub_DOB"
+                        placeholder="Subscriber DOB"
+                        className="form-control"
+                        value={this.state.sub_DOB}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="rel_to_sub"
+                        className="form-control"
+                        placeholder="Relationship to subscriber"
+                        value={this.state.rel_to_sub}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      name="emp_name"
+                      className="form-control"
+                      placeholder="Employee Name"
+                      value={this.state.emp_name}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                </div>
+                {/* <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="emp_name"
+                        className="form-control"
                         placeholder="Employee Name"
                         value={this.state.ptInsurance.emp_name}
                         onChange={this.onChange}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
-                  
-                  
-                     <div className="col-md-4 float-left">
-                    <div className='form-group'>
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
                     <input
-                        type='text'
-                        name='emp_phone'
-                        className='form-control'
-                        placeholder="Employer phone no"
-                        value={this.state.ptInsurance.emp_phone}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                    </div>
-                     <div className="col-md-4 float-left">
-                    <div className='form-group'>
+                      type="text"
+                      name="emp_phone"
+                      className="form-control"
+                      placeholder="Employer phone no"
+                      value={this.state.emp_phone}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4 float-left">
+                  <div className="form-group">
                     <input
-                        type='text'
-                        name='occupation'
-                        className='form-control'
-                        placeholder="Occupation"
-                        value={this.state.ptInsurance.occupation}
-                        onChange={this.onChange}
-                      />
+                      type="text"
+                      name="occupation"
+                      className="form-control"
+                      placeholder="Occupation"
+                      value={this.state.occupation}
+                      onChange={this.onChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-md-12 float-left">
+                  <div>
+                    <h4>Medical History</h4>
+                  </div>
+                  <div className="float-left checkboxgroup">
+                    <div className="form-group">
+                      <React.Fragment>
+                        {allergies.map(item => (
+                          <label key={item.key}>
+                            {item.name}
+                            <Checkbox
+                              name={item.name}
+                              checked={this.state.checkedItems.get(item.name)}
+                              onChange={this.handleChange}
+                              value={this.state.ptAllergies}
+                            />
+                          </label>
+                        ))}
+                      </React.Fragment>
+
+                      {/* </div> */}
+                      {/* </div> */}
                     </div>
                   </div>
-
-                  
-                    <div className="col-md-4 float-left">
-                      <div className='form-group'>
-                        <input
-                          type='text'
-                          name='ptBloodGroup'
-                          className='form-control'
-                          placeholder="Blood Group"
-                          value={this.state.ptInsurance.ptBloodGroup}
-                          onChange={this.onChange}
-                        />
-                    </div>
-                    </div>
-
-                  
-
-                  {/* <div className="row"> */}
-                  <div><h4>Medical History</h4></div>
-                    <div className="col-md-12 float-left checkboxgroup">
-                          <div className="form-group col-md-12">
-                           {/* <div className="col-md-2"> */}
-                             <React.Fragment>{allergies.map(item => (
-            <label key={item.key}>
-              {item.name}
-              <Checkbox name={item.name} checked={this.state.checkedItems.get(item.name)} onChange={this.handleChange} />
-            </label>
-          ))
-        }
-      </React.Fragment>
-      {/* </div> */}
-                          {/* </div> */}
-                        </div>
-                  </div>
-
-                   
-                </form>
-                
                 </div>
                 <div className="col-md-12">
-                   <div className="col-md-2  float-right">
-                  <input
-                    type="submit"
-                    className="btn btn-success btn-block"
-                  />
+                  <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <textarea
+                        name="ptAnyOperation"
+                        className="form-control"
+                        placeholder="List any operation"
+                        value={this.state.ptAnyOperation}
+                        onChange={this.onChange}
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <textarea
+                        name="ptCurrentMedications"
+                        className="form-control"
+                        placeholder="Current Medications"
+                        value={this.state.ptCurrentMedications}
+                        onChange={this.onChange}
+                      ></textarea>
+                    </div>
+                  </div>
                 </div>
+
+                <div className="col-md-12 float-left">
+                  <div className="form-group">
+                    <h4>Exercise</h4> <br />
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="exercise"
+                        value="Never"
+                        checked={this.state.exercise === "Never"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="never">
+                        Never
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="exercise"
+                        value="1-2 days"
+                        checked={this.state.exercise === "1-2 days"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="1to2days">
+                        1-2 days
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="exercise"
+                        value="3-4 days"
+                        checked={this.state.exercise === "3-4 days"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="3to4days">
+                        3-4 days
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="exercise"
+                        value="5+ days"
+                        checked={this.state.exercise === "5+ days"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="5days">
+                        5+ days
+                      </label>
+                    </div>
+                  </div>
                 </div>
+
+                <div className="col-md-12 float-left">
+                  <div className="form-group">
+                    <h4>Eating following a diet</h4> <br />
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="eating_following_a_diet"
+                        value="I have a loose diet"
+                        checked={
+                          this.state.eating_following_a_diet ===
+                          "I have a loose diet"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="looseDiet">
+                        I have a loose diet
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="eating_following_a_diet"
+                        value="I have a strict diet"
+                        checked={
+                          this.state.eating_following_a_diet ===
+                          "I have a strict diet"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="strictDiet">
+                        I have a strict diet
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="eating_following_a_diet"
+                        value="I don't have a diet plan"
+                        checked={
+                          this.state.eating_following_a_diet ===
+                          "I don't have a diet plan"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="noDiet">
+                        I don't have a diet plan
+                      </label>
+                    </div>
+                  </div>
                 </div>
+
+                <div className="col-md-12 float-left">
+                  <div className="form-group">
+                    <h4>Alcohol Consumption</h4> <br />
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="alcohol_consumption"
+                        value="I don't drink"
+                        checked={
+                          this.state.alcohol_consumption === "I don't drink"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="dontDrink">
+                        I don't drink
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="alcohol_consumption"
+                        value="1-2 glasses/day"
+                        checked={
+                          this.state.alcohol_consumption === "1-2 glasses/day"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="1to2glasses">
+                        1-2 glasses/day
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="alcohol_consumption"
+                        value="3-4 glasses/day"
+                        checked={
+                          this.state.alcohol_consumption === "3-4 glasses/day"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="3to4glasses">
+                        3-4 glasses/day
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="alcohol_consumption"
+                        value="5+ glasses/day"
+                        checked={
+                          this.state.alcohol_consumption === "5+ glasses/day"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="5glasses">
+                        5+ glasses/day
+                      </label>
+                    </div>
+                  </div>
                 </div>
+
+                <div className="col-md-12 float-left">
+                  <div className="form-group">
+                    <h4>Caffeine Consumption</h4> <br />
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="caffeine_consumption"
+                        value="I don't use caffeine"
+                        checked={
+                          this.state.caffeine_consumption ===
+                          "I don't use caffeine"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="noUse">
+                        I don't use caffeine
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="caffeine_consumption"
+                        value="1-2 cups/day"
+                        checked={
+                          this.state.caffeine_consumption === "1-2 cups/day"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="1to2cups">
+                        1-2 cups/day
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="caffeine_consumption"
+                        value="3-4 cups/day"
+                        checked={
+                          this.state.caffeine_consumption === "3-4 cups/day"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="3to4cups">
+                        3-4 cups/day
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="caffeine_consumption"
+                        value="5+ cups/day"
+                        checked={
+                          this.state.caffeine_consumption === "5+ cups/day"
+                        }
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="5cups">
+                        5+ cups/day
+                      </label>
+                    </div>
+                  </div>
                 </div>
+
+                <div className="col-md-12 float-left">
+                  <div className="form-group">
+                    <h4>Do you smoke?</h4> <br />
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="do_you_smoke"
+                        value="No"
+                        checked={this.state.do_you_smoke === "No"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="no">
+                        No
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="do_you_smoke"
+                        value="0-1 pack/day"
+                        checked={this.state.do_you_smoke === "0-1 pack/day"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="0to1pack">
+                        0-1 pack/day
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="do_you_smoke"
+                        value="1-2 packs/day"
+                        checked={this.state.do_you_smoke === "1-2 packs/day"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="1to2packs">
+                        1-2 packs/day
+                      </label>
+                    </div>
+                    <div className="form-check float-left">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="do_you_smoke"
+                        value="2+ packs/day"
+                        checked={this.state.do_you_smoke === "2+ packs/day"}
+                        onChange={this.onChange}
+                      />
+                      <label className="form-check-label" htmlFor="2packs">
+                        2+ packs/day
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="form-group">
+                    <textarea
+                      name="ptNote"
+                      className="form-control"
+                      placeholder="Include other comments regarding your Medical History"
+                      value={this.state.ptNote}
+                      onChange={this.onChange}
+                    ></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+            {/* <div className="col-md-12"> */}
+            <div className="col-md-2  float-right">
+              <input type="submit" className="btn btn-success btn-block" />
+            </div>
+            {/* </div> */}
+          </div>
+        </div>
+      </div>
       //           // </div>
-                
+
       //           {/* <div className="row">
       //             <div className="col-md-4">
       //               <div className='form-group'>
@@ -432,14 +701,13 @@ class AddBasicInfo extends Component {
       //               </div>
       //             </div>
       //           </div> */}
-               
+
       //         </form>
       //       </div>
       //     </div>
       //   </div>
       // </div>
-    
-    )
+    );
   }
 }
 export default AddBasicInfo;

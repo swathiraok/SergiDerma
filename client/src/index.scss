@@ -16,10 +16,23 @@
         line-height: 1.5em;
         padding: 15px 0;
         font-size: 18px;
+        color: #9A338E;
     }
     div{
         padding-left: 0;
         margin-bottom: 20px;
+    }
+    .form-group{
+        .form-check{
+            input{
+                margin-left: 0px;
+            }
+            label{
+                margin-bottom: 0;
+                padding-right: 50px;
+                padding-left: 20px;
+            }
+        }
     }
 .tiles{
     width: 20%;
@@ -65,6 +78,10 @@
     border: 0;
     border-bottom: 1px solid #ccc;
     border-radius: 0;
+    &:focus{
+        box-shadow: none;
+        border-bottom-color: #3f51b5;
+    }
 }
 .checkboxgroup{
     label{
@@ -109,4 +126,10 @@
         width: 20%;
         float: right;
     }
+}
+
+/* To fix this: https://github.com/twbs/bootstrap/issues/10152 */
+[class*=col-] + .col-xs-12, [class*=col-] + .col-sm-12, [class*=col-] + .col-md-12, [class*=col-] + .col-lg-12 {
+    float: left;
+    width: 100%;
 }

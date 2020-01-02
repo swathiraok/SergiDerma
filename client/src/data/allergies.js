@@ -85,11 +85,6 @@ export const allergies = [
     label: 'Ulcer Disease',
   },
   {
-    name: 'Ulcer Disease',
-    key: 'Ulcer Disease',
-    label: 'Ulcer Disease',
-  },
-  {
     name: 'Hepatitis',
     key: 'Hepatitis',
     label: 'Hepatitis',
@@ -113,11 +108,6 @@ export const allergies = [
     name: 'Use a C-PAP machine',
     key: 'Use a C-PAP machine',
     label: 'Use a C-PAP machine',
-  },
-  {
-    name: 'Thyroid Problems',
-    key: 'Thyroid Problems',
-    label: 'Thyroid Problems',
   },
   {
     name: 'Thyroid Problems',

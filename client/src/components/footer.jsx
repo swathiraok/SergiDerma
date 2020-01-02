@@ -7,11 +7,11 @@ class Footer extends Component {
         <div className="footerWrap">
           <div className="col-md-12">
             <div className="col-md-10 float-left">
-            <div class="copyright">
+            <div className="copyright">
                 <span>Copyright © 2019, SurgiDerma. </span>
                 <span>All rights reserved.</span>
               </div></div>
-            <div class="col-md-2 float-right">
+            <div className="col-md-2 float-right">
                 <img src={Logo} alt="finch logo"/>
             </div>
           </div>
