@@ -12,7 +12,14 @@
         padding-bottom: 20px;
     }
     h4{
-        width: 100%;
+        width: 100% ;
+        line-height: 1.5em;
+        padding: 15px 0;
+        font-size: 18px;
+    }
+    div{
+        padding-left: 0;
+        margin-bottom: 20px;
     }
 .tiles{
     width: 20%;
@@ -53,6 +60,23 @@
             color: #FFF;
         }
     }
+}
+.form-control{
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+}
+.checkboxgroup{
+    label{
+        padding-right: 5%;
+    min-width: 270px;
+        input{
+            float: left;
+        margin-top: 6px;
+        margin-right: 15px;
+        }
+    }
+    
 }
 }
 .headerWrap{

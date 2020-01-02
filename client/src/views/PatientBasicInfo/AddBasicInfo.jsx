@@ -77,10 +77,7 @@ class AddBasicInfo extends Component {
             checkedItems: new Map(),
         }
         this.handleChange = this.handleChange.bind(this);
-    // this.handleCheckBox = this.handleCheckBox.bind(this);
-    // this.handleInput = this.handleInput.bind(this);
-    this.onChange = this.onChange.bind(this);
-
+        this.onChange = this.onChange.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -222,7 +219,7 @@ class AddBasicInfo extends Component {
                     </div>
                   </div>
                 
-                <div className="row">
+               
                   <div className="col-md-4">
                     <div className='form-group'>
                     <input
@@ -235,10 +232,10 @@ class AddBasicInfo extends Component {
                       />
                     </div>
                   </div>
-                </div>
-                <div className="row">
+                
+                
                 <div><h4>Insurance Information</h4></div>
-                  <div className="col-md-4">
+                  <div className="col-md-4 float-left">
                     <div className='form-group'>
                        <input
                         type='text'
@@ -250,7 +247,7 @@ class AddBasicInfo extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-4 float-left">
                     <div className='form-group'>
                      <input
                         type='date'
@@ -262,7 +259,7 @@ class AddBasicInfo extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-md-4 float-left">
                     <div className='form-group'>
                        <input
                         type='text'
@@ -274,11 +271,10 @@ class AddBasicInfo extends Component {
                       />
                     </div>
                   </div>
-                </div>
-                  <div className="row">
-                  <div className="col-md-4">
+
+                   <div className="col-md-4 float-left">
                     <div className='form-group'>
-                      <input
+                       <input
                         type='text'
                         name='emp_name'
                         className='form-control'
@@ -287,8 +283,11 @@ class AddBasicInfo extends Component {
                         onChange={this.onChange}
                       />
                     </div>
-                    </div>
-                     <div className="col-md-4">
+                  </div>
+
+                  
+                  
+                     <div className="col-md-4 float-left">
                     <div className='form-group'>
                     <input
                         type='text'
@@ -300,7 +299,7 @@ class AddBasicInfo extends Component {
                       />
                     </div>
                     </div>
-                     <div className="col-md-4">
+                     <div className="col-md-4 float-left">
                     <div className='form-group'>
                     <input
                         type='text'
@@ -313,9 +312,8 @@ class AddBasicInfo extends Component {
                     </div>
                   </div>
 
-                  </div>
-                  <div className="row">
-                    <div className="col-md-4">
+                  
+                    <div className="col-md-4 float-left">
                       <div className='form-group'>
                         <input
                           type='text'
@@ -328,12 +326,13 @@ class AddBasicInfo extends Component {
                     </div>
                     </div>
 
-                  </div>
+                  
 
-                  <div className="row">
-                  <div><h4>Medical History </h4></div>
-                    <div className="col-md-4">
-                          <div className="form-group">
+                  {/* <div className="row"> */}
+                  <div><h4>Medical History</h4></div>
+                    <div className="col-md-12 float-left checkboxgroup">
+                          <div className="form-group col-md-12">
+                           {/* <div className="col-md-2"> */}
                              <React.Fragment>{allergies.map(item => (
             <label key={item.key}>
               {item.name}
@@ -342,26 +341,23 @@ class AddBasicInfo extends Component {
           ))
         }
       </React.Fragment>
-                          </div>
+      {/* </div> */}
+                          {/* </div> */}
                         </div>
                   </div>
 
-                   <div className="row">
-                    <div className="col-md-4">
-                          <div className="form-group">
-
-                          </div>
-                        </div>
-                        </div>
+                   
                 </form>
-                 <div className="col-md-2  float-right">
+                
+                </div>
+                <div className="col-md-12">
+                   <div className="col-md-2  float-right">
                   <input
                     type="submit"
-                    className="btn btn-outline-success btn-block"
+                    className="btn btn-success btn-block"
                   />
                 </div>
                 </div>
-
                 </div>
                 </div>
                 </div>
