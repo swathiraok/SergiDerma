@@ -44,7 +44,7 @@ class AddBasicInfo extends Component {
     }));
   }
 
-  onSubmit = e => {
+  onSubmitData = e => {
     console.log("inside submit");
     e.preventDefault();
     const data = {
@@ -52,20 +52,24 @@ class AddBasicInfo extends Component {
       ptWeight: this.state.ptWeight,
       ptBMI: this.state.ptBMI,
       ptBloodGroup: this.state.ptBloodGroup,
+      ptInsurance: {
       sub_name: this.state.sub_name,
       sub_DOB: this.state.sub_DOB,
       rel_to_sub: this.state.rel_to_sub,
       emp_name: this.state.emp_name,
       emp_phone: this.state.emp_phone,
-      occupation: this.state.occupation,
+      occupation: this.state.occupation
+      },
       ptAllergies: this.state.ptAllergies,
       ptAnyOperation: this.state.ptAnyOperation,
       ptCurrentMedications: this.state.ptCurrentMedications,
+      ptHabit: {
       exercise: this.state.exercise,
       eating_following_a_diet: this.state.eating_following_a_diet,
       alcohol_consumption: this.state.alcohol_consumption,
       caffeine_consumption: this.state.caffeine_consumption,
-      do_you_smoke: this.state.do_you_smoke,
+      do_you_smoke: this.state.do_you_smoke
+      },
       ptNote: this.state.ptNote
     };
 
@@ -84,7 +88,7 @@ class AddBasicInfo extends Component {
             emp_phone: "",
             occupation: ""
           },
-          ptAllergies: [],
+          ptAllergies: "",
           ptAnyOperation: "",
           ptCurrentMedications: "",
           ptHabit: {
@@ -112,7 +116,7 @@ class AddBasicInfo extends Component {
             <div className="col-md-12">
               <h5>Patient Basic Information details</h5>
 
-              <form noValidate onSubmit={this.onSubmit}>
+              <form noValidate onSubmit={this.onSubmitData}>
                 <div>
                   <h4>Physical Information</h4>
                 </div>
@@ -219,18 +223,7 @@ class AddBasicInfo extends Component {
                     />
                   </div>
                 </div>
-                {/* <div className="col-md-4 float-left">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        name="emp_name"
-                        className="form-control"
-                        placeholder="Employee Name"
-                        value={this.state.ptInsurance.emp_name}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                  </div> */}
+               
 
                 <div className="col-md-4 float-left">
                   <div className="form-group">
@@ -276,9 +269,6 @@ class AddBasicInfo extends Component {
                           </label>
                         ))}
                       </React.Fragment>
-
-                      {/* </div> */}
-                      {/* </div> */}
                     </div>
                   </div>
                 </div>
@@ -620,93 +610,17 @@ class AddBasicInfo extends Component {
                     ></textarea>
                   </div>
                 </div>
-              </form>
-            </div>
-            {/* <div className="col-md-12"> */}
+                <div className="col-md-12">
             <div className="col-md-2  float-right">
               <input type="submit" className="btn btn-success btn-block" />
             </div>
-            {/* </div> */}
+            </div>
+              </form>
+            </div>
+            
           </div>
         </div>
       </div>
-      //           // </div>
-
-      //           {/* <div className="row">
-      //             <div className="col-md-4">
-      //               <div className='form-group'>
-      //                  <input
-      //                   type='text'
-      //                   name='emp_name'
-      //                   className='form-control'
-      //                   placeholder="Employee Name"
-      //                   value={this.state.ptInsurance.emp_name}
-      //                   onChange={this.onChange}
-      //                 />
-      //               </div>
-      //               </div>
-      //               <div className="col-md-4">
-      //               <div className='form-group'>
-      //               <input
-      //                   type='text'
-      //                   name='emp_phone'
-      //                   className='form-control'
-      //                   placeholder="Employer phone no"
-      //                   value={this.state.ptInsurance.emp_phone}
-      //                   onChange={this.onChange}
-      //                 />
-      //               </div>
-      //               </div>
-      //               <div className="col-md-4">
-      //               <div className='form-group'>
-      //               <input
-      //                   type='text'
-      //                   name='occupation'
-      //                   className='form-control'
-      //                   placeholder="Occupation"
-      //                   value={this.state.ptInsurance.occupation}
-      //                   onChange={this.onChange}
-      //                 />
-      //               </div>
-      //             </div>
-      //             </div>
-      //             <div className="row">
-      //               <div className="col-md-4">
-      //                 <div className='form-group'>
-      //                   <input
-      //                     type='text'
-      //                     name='ptBloodGroup'
-      //                     className='form-control'
-      //                     placeholder="Blood Group"
-      //                     value={this.state.ptInsurance.ptBloodGroup}
-      //                     onChange={this.onChange}
-      //                   />
-      //               </div>
-      //               </div>
-      //               </div>
-      //               <div className="row">
-      //                 <div className="col-md-4">
-      //                     <div className="form-group">
-      //                       <React.Fragment>{allergies.map(item => (
-      //       <label key={item.key}>
-      //         {item.name}
-      //         <Checkbox name={item.name} checked={this.state.checkedItems.get(item.name)} onChange={this.handleChange} />
-      //       </label>
-      //     ))
-      //   }
-      // </React.Fragment>
-
-      //                     </div>
-      //                 </div>
-      //               </div>
-      //             </div>
-      //           </div> */}
-
-      //         </form>
-      //       </div>
-      //     </div>
-      //   </div>
-      // </div>
     );
   }
 }
