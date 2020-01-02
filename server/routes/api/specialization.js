@@ -40,9 +40,18 @@ function(req, res) {
  */
 router.get("/", (req, res) => {
     Specialization.find()
-        .then(specializations => res.json(specializations))
+        .then(specializations => {
+            try {
+                if(specializations==null)
+                throw new ValidaError(404,"Unable to find " +req.query.id);
+                else
+                res.json(specializations);
+            } catch (error) {
+                next(error);
+            }
+        })
         .catch(err => {
-            res.status(500).json({ message : err.message || "Internal server error"})
+            res.status(500).json({ message : "Internal server error"})
         })
 });
 
@@ -51,27 +60,57 @@ router.get("/", (req, res) => {
  * @description update specialization
  * @access public
  */
-router.put("/:id",async function(req, res){
+// router.put("/:id",async function(req, res){
 
-    //validate the request
-    if(!req.body){
-        return res.status(400).json({ message : "request body cannot be empty"});
-    }
-    //find the clinic specs by Id and update it 
-    Specialization.findByIdAndUpdate(req.params.id, req.body)
-        .then(specializations => {
-            if(!specializations){
-                return res.status(404).json({ message : "specialization not found with id" + req.params.id });
-            }
-            return res.json({message: "specialization data updated successfully"});
-        })
-        .catch(err => {
-            if(err.kind === 'objectId'){
-                return res.status(404).json({ message : "service not found with id" + req.params.id })
-            }
-            return res.status(500).json({ message : "Error in updating with id" + req.params.id})
-        })
+//     //validate the request
+//     if(!req.body){
+//         return res.status(400).json({ message : "request body cannot be empty"});
+//     }
+//     //find the clinic specs by Id and update it 
+//     Specialization.findByIdAndUpdate(req.params.id, req.body)
+//         .then(specializations => {
+//             if(!specializations){
+//                 return res.status(404).json({ message : "specialization not found with id" + req.params.id });
+//             }
+//             return res.json({message: "specialization data updated successfully"});
+//         })
+//         .catch(err => {
+//             if(err.kind === 'objectId'){
+//                 return res.status(404).json({ message : "service not found with id" + req.params.id })
+//             }
+//             return res.status(500).json({ message : "Error in updating with id" + req.params.id})
+//         })
 
 
-});
+// });
+router.post("/",
+[
+    check("name", "name is mandatory and cant be empty")
+        .not()
+        .isEmpty(),
+    check("description", "Descripton required cant be empty")
+        .not()
+        .isEmpty()
+],
+async function(req,res,next) {
+    //validation check
+    const errors=validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).jsonp(errors.array());
+        }else{
+           await Specialization.findOneAndUpdate({id:req.query.id},req.body)
+            .then(specializations =>{
+            try {
+                if(specializations == null)
+                throw new ValidaError(404,"Unable to find " +req.query.id);
+                else
+                res.json(specializations);
+                } catch (error) {
+                    next(error);
+                }
+            })
+            .catch(err =>res.json(err));    
+        }
+});           
+
 module.exports = router;

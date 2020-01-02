@@ -2,7 +2,8 @@
 
 const express = require("express");
 const connectDB = require("./config/db");
-const logger = require("./config/logger")
+// const logger = require("./config/logger")
+const { handleError, ErrorHandler } = require('./helpers/error')
 // const multer = require('multer');
 // const GridFsStorage = require('multer-gridfs-storage');
 // const Grid = require('gridfs-stream');
@@ -50,5 +51,14 @@ app.use("/appntState",appointmentState);
 
 const port = process.env.PORT || 8082;
 
+app.get('/error', (req, res) => {
+    throw new ErrorHandler(500, 'Internal server error');
+  })
+
+app.use((err, req, res, next) => {
+    handleError(err, res);
+  });
+
+
 app.listen(port, () => {
-    logger.log(`Server running on port ${port}`)});
+    logger.log('info',`Server running on port ${port}`)});
