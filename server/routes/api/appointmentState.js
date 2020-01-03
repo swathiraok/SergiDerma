@@ -86,7 +86,7 @@ router.get("/", (req, res) => {
 //         })
 // });
 
-outer.put("/",
+router.put("/",
 [
     check("cd", "code is mandatory and cant be empty")
         .not()

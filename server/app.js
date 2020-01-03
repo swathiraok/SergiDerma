@@ -3,7 +3,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 // const logger = require("./config/logger")
-const { handleError, ErrorHandler } = require('./helpers/error')
+const { handleError, ErrorHandler } = require('./helper/error')
 // const multer = require('multer');
 // const GridFsStorage = require('multer-gridfs-storage');
 // const Grid = require('gridfs-stream');
