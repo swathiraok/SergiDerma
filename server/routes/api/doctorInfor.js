@@ -48,8 +48,6 @@ async function(req,res){
                                    message: "doctor info added successfully..",
                                    status:"200" }))
         .catch(err =>res.status(500).json(err))
-    
-      
     }       
 });
 
@@ -125,7 +123,5 @@ router.get("/getAll",function( req, res ){
     })
     .pipe( res );
 });
-
-
 
 module.exports=router;
