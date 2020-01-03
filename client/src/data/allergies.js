@@ -172,6 +172,12 @@ export const allergies = [
     key: 'Emphysema',
     label: 'Emphysema',
     value: 'Emphysema',
+  },
+  {
+    name: 'Others',
+    key: 'Others',
+    label: 'Others',
+    value: 'Others',
   }
 ];
 

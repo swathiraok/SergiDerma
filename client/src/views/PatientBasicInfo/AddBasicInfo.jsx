@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "index.scss";
-import Checkbox from "../../components/Checkbox";
 import { allergies } from "../../data/allergies.js";
+// import { required } from "../../utils/reduxFormValiadtion.js";
 
 class AddBasicInfo extends Component {
   constructor() {
@@ -13,12 +13,10 @@ class AddBasicInfo extends Component {
       ptWeight: "",
       ptBMI: "",
       ptBloodGroup: "",
-      sub_name: "",
-      sub_DOB: "",
-      rel_to_sub: "",
-      emp_name: "",
-      emp_phone: "",
-      occupation: "",
+      prdrNm: "",
+      plcyNo: "",
+      plcyType: "",
+      valdUpTo: "",
       ptAllergies: [],
       ptAnyOperation: "",
       ptCurrentMedications: "",
@@ -53,12 +51,10 @@ class AddBasicInfo extends Component {
       ptBMI: this.state.ptBMI,
       ptBloodGroup: this.state.ptBloodGroup,
       ptInsurance: {
-        sub_name: this.state.sub_name,
-        sub_DOB: this.state.sub_DOB,
-        rel_to_sub: this.state.rel_to_sub,
-        emp_name: this.state.emp_name,
-        emp_phone: this.state.emp_phone,
-        occupation: this.state.occupation
+        prdrNm: this.state.prdrNm,
+        plcyNo: this.state.plcyNo,
+        plcyType: this.state.plcyType,
+        valdUpTo: this.state.valdUpTo
       },
       ptAllergies: this.state.ptAllergies,
       ptAnyOperation: this.state.ptAnyOperation,
@@ -74,7 +70,7 @@ class AddBasicInfo extends Component {
     };
 
     axios
-      .post("http://139.59.3.138:8082/patientBasicInfo/", data)
+      .post("http://localhost:8082/patientBasicInfo/", data)
       .then(res => {
         this.setState({
           ptId: "1234",
@@ -83,12 +79,10 @@ class AddBasicInfo extends Component {
           ptBMI: "",
           ptBloodGroup: "",
           ptInsurance: {
-            sub_name: "",
-            sub_DOB: "",
-            rel_to_sub: "",
-            emp_name: "",
-            emp_phone: "",
-            occupation: ""
+            prdrNm: "",
+            plcyNo: "",
+            plcyType: "",
+            valdUpTo: ""
           },
           ptAllergies: [],
           ptAnyOperation: "",
@@ -118,7 +112,7 @@ class AddBasicInfo extends Component {
             <div className="col-md-12">
               <h5>Patient Basic Information details</h5>
 
-              <form noValidate onSubmit={this.onSubmitData}>
+              <form onSubmit={this.onSubmitData}>
                 <div>
                   <h4>Physical Information</h4>
                 </div>
@@ -180,22 +174,10 @@ class AddBasicInfo extends Component {
                     <div className="form-group">
                       <input
                         type="text"
-                        name="sub_name"
+                        name="prdrNm"
                         className="form-control"
-                        placeholder="Subscriber Name"
-                        value={this.state.sub_name}
-                        onChange={this.onChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4 float-left">
-                    <div className="form-group">
-                      <input
-                        type="date"
-                        name="sub_DOB"
-                        placeholder="Subscriber DOB"
-                        className="form-control"
-                        value={this.state.sub_DOB}
+                        placeholder="Insurance Provider Name"
+                        value={this.state.prdrNm}
                         onChange={this.onChange}
                       />
                     </div>
@@ -204,10 +186,22 @@ class AddBasicInfo extends Component {
                     <div className="form-group">
                       <input
                         type="text"
-                        name="rel_to_sub"
+                        name="plcyNo"
+                        placeholder="Policy Number"
                         className="form-control"
-                        placeholder="Relationship to subscriber"
-                        value={this.state.rel_to_sub}
+                        value={this.state.plcyNo}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4 float-left">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="plcyType"
+                        className="form-control"
+                        placeholder="Policy Type"
+                        value={this.state.plcyType}
                         onChange={this.onChange}
                       />
                     </div>
@@ -216,36 +210,11 @@ class AddBasicInfo extends Component {
                 <div className="col-md-4 float-left">
                   <div className="form-group">
                     <input
-                      type="text"
-                      name="emp_name"
+                      type="date"
+                      name="valdUpTo"
                       className="form-control"
-                      placeholder="Employee Name"
-                      value={this.state.emp_name}
-                      onChange={this.onChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="col-md-4 float-left">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name="emp_phone"
-                      className="form-control"
-                      placeholder="Employer phone no"
-                      value={this.state.emp_phone}
-                      onChange={this.onChange}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-4 float-left">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      name="occupation"
-                      className="form-control"
-                      placeholder="Occupation"
-                      value={this.state.occupation}
+                      placeholder="Valid Upto"
+                      value={this.state.valdUpTo}
                       onChange={this.onChange}
                     />
                   </div>
@@ -308,6 +277,7 @@ class AddBasicInfo extends Component {
                         value="Never"
                         checked={this.state.exercise === "Never"}
                         onChange={this.onChange}
+                        required
                       />
                       <label className="form-check-label" htmlFor="never">
                         Never
@@ -347,6 +317,7 @@ class AddBasicInfo extends Component {
                         value="5+ days"
                         checked={this.state.exercise === "5+ days"}
                         onChange={this.onChange}
+                        required
                       />
                       <label className="form-check-label" htmlFor="5days">
                         5+ days
@@ -369,6 +340,7 @@ class AddBasicInfo extends Component {
                           "I have a loose diet"
                         }
                         onChange={this.onChange}
+                        required
                       />
                       <label className="form-check-label" htmlFor="looseDiet">
                         I have a loose diet
@@ -422,6 +394,7 @@ class AddBasicInfo extends Component {
                           this.state.alcohol_consumption === "I don't drink"
                         }
                         onChange={this.onChange}
+                        required
                       />
                       <label className="form-check-label" htmlFor="dontDrink">
                         I don't drink
@@ -489,6 +462,7 @@ class AddBasicInfo extends Component {
                           "I don't use caffeine"
                         }
                         onChange={this.onChange}
+                        required
                       />
                       <label className="form-check-label" htmlFor="noUse">
                         I don't use caffeine
@@ -553,6 +527,7 @@ class AddBasicInfo extends Component {
                         value="No"
                         checked={this.state.do_you_smoke === "No"}
                         onChange={this.onChange}
+                        required
                       />
                       <label className="form-check-label" htmlFor="no">
                         No

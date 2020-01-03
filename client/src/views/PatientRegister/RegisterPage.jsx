@@ -63,7 +63,7 @@ class RegisterPage extends Component {
             <div className="col-md-12">
               <h5>Register Patient</h5>
 
-              <form noValidate onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit}>
                 <div className="row">
                   <div className="col-md-4">
                     <div className="form-group">
@@ -74,6 +74,7 @@ class RegisterPage extends Component {
                         placeholder="First Name"
                         value={this.state.frstNm}
                         onChange={this.onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -86,6 +87,7 @@ class RegisterPage extends Component {
                         placeholder="Middle Name"
                         value={this.state.mddlNm}
                         onChange={this.onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -98,6 +100,7 @@ class RegisterPage extends Component {
                         placeholder="Last Name"
                         value={this.state.lstNm}
                         onChange={this.onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -113,6 +116,7 @@ class RegisterPage extends Component {
                           value="Male"
                           checked={this.state.gndr === "Male"}
                           onChange={this.onChange}
+                          required
                         />
                         <label className="form-check-label" htmlFor="male">
                           Male
@@ -142,6 +146,7 @@ class RegisterPage extends Component {
                         placeholder="Phone Number"
                         value={this.state.phnNm}
                         onChange={this.onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -154,6 +159,7 @@ class RegisterPage extends Component {
                         className="form-control"
                         value={this.state.dob}
                         onChange={this.onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -168,6 +174,7 @@ class RegisterPage extends Component {
                         placeholder="Email Address"
                         value={this.state.email}
                         onChange={this.onChange}
+                        required
                       />
                     </div>
                   </div>
@@ -182,6 +189,7 @@ class RegisterPage extends Component {
                           value="Direct"
                           checked={this.state.type === "Direct"}
                           onChange={this.onChange}
+                          required
                         />
                         <label className="form-check-label" htmlFor="direct">
                           Direct{" "}

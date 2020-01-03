@@ -6,36 +6,28 @@ const PatientBasicInformationSchema=new mongoose.Schema({
         required:true
     },
     ptHeight:{
-        type:String,
-        required:true
+        type:String
     },
     ptWeight:{
-        type:String,
-        required:true
+        type:String
     },
     ptBMI:{
-        type:String,
-        required:true
+        type:String
     },
     ptBloodGroup:{
-        type:String,
-        required:true
+        type:String
     },
     ptInsurance:{
-        type:JSON,
-        required:true
+        type:JSON
     },
     ptAllergies:{
-        type:JSON,
-        required:true
+        type:JSON
     },
     ptAnyOperation:{
-        type:String,
-        required:true
+        type:String
     },
     ptCurrentMedications:{
-        type:String,
-        required:true
+        type:String
     },
     ptHabit:{
         type:JSON,

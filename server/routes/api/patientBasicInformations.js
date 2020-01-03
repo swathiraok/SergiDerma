@@ -51,13 +51,6 @@ const PatientBasicInfo = require("../../models/PatientBasicInformation");
     "ptNote":""
 } */
 router.post("/",[
-    check('ptHeight','Patient Height is required!!').not().isEmpty(),
-    check('ptWeight','Patient weight is required!!').not().isEmpty(),
-    check('ptBMI','Patient BMI  is required!!').not().isEmpty(),
-    check('ptBloodGroup','Patient blood group is required!!').not().isEmpty(),
-    check('ptAllergies','Patient allergies is required!!').not().isEmpty(),
-    check('ptAnyOperation','Patient any operation is required!!').not().isEmpty(),
-    check('ptCurrentMedications','Patient current medication  is required!!').not().isEmpty(),
     check('ptHabit','Patient ptHabit is required!!').not().isEmpty()
 ],
 function(req,res){
