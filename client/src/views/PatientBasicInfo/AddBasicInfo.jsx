@@ -70,7 +70,7 @@ class AddBasicInfo extends Component {
     };
 
     axios
-      .post("http://localhost:8082/patientBasicInfo/", data)
+      .post("http://139.59.3.138:8082/patientBasicInfo/", data)
       .then(res => {
         this.setState({
           ptId: "1234",
