@@ -8,6 +8,7 @@ import Footer from './components/footer';
 import ProfilePage from '././views/DoctorProfile/ProfilePage';
 import RegisterPage from '././views/PatientRegister/RegisterPage';
 import AddBasicInfo from '././views/PatientBasicInfo/AddBasicInfo';
+import Patients from './views/Patients';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path='/doctors' component={ProfilePage} />
           <Route path='/register' component={RegisterPage} />
           <Route path='/basicInfo' component={AddBasicInfo} />
+           <Route path='/patients' component={Patients} />
           {/* <Route path='/create-book' component={CreateBook} />
           <Route path='/edit-book/:id' component={UpdateBookInfo} />
           <Route path='/show-book/:id' component={ShowBookDetails} /> */}

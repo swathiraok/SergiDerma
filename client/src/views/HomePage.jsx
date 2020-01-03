@@ -10,6 +10,7 @@ class HomePage extends Component {
       super(props);
       this.register = this.register.bind(this);
       this.doctors = this.doctors.bind(this);
+      this.patients = this.patients.bind(this);
       this.home = this.home.bind(this);
   }
   register(){
@@ -17,6 +18,9 @@ class HomePage extends Component {
   }
   doctors(){
      this.props.history.push("/doctors");
+  }
+  patients(){
+    this.props.history.push("/patients");
   }
   home(){
     this.props.history.push("/");
@@ -27,7 +31,7 @@ class HomePage extends Component {
         <div className="col-md-12">
           <button className="float-left tiles" onClick={this.register}>Register</button>
            <button className="float-left tiles" onClick={this.doctors}>Doctors</button>
-            <button className="float-left tiles" onClick={this.home}>Patients</button>
+            <button className="float-left tiles" onClick={this.patients}>Patients</button>
              <button className="float-left tiles" onClick={this.home}>Prescriptions</button>
               <button className="float-left tiles" onClick={this.home}>Documents</button>
                <button className="float-left tiles" onClick={this.home}>Invoices</button>

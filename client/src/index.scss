@@ -118,7 +118,30 @@
       }
     }
   }
+  .ReactTable{
+      border: 0;
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+      div{
+        margin-bottom: 0;
+      }
+    .rt-thead .rt-th{
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        text-align: left;
+    }
+    
+    .rt-tbody{
+        .rt-tr{
+            font-size: 15px;
+            &.-even{
+                background-color: #f2f2f2;
+            }
+        }
+    }
+  }
 }
+
 .headerWrap {
   border-bottom: 1px solid #d6d6d6;
   position: fixed;
@@ -142,7 +165,7 @@
   float: left;
   padding: 10px;
   background-color: #f4f4f4;
-  position: fixed;
+//   position: fixed;
   bottom: 0;
   right: 0;
   img {
