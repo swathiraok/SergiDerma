@@ -4,49 +4,49 @@ const nanoid = require('nanoid');
 
 
 const ClinicAddrSchema=new mongoos.Schema({
-    ClinId:{
+    clinId:{
         type:String,
         default:() =>"HKN1"+nanoid(6),
         require:true
     },
-    AddrLn1:{
+    addrLn1:{
         type:String,
         require:true
     },
-    AddrLn2:{
+    addrLn2:{
         type:String
     },
-    AddrLn3:{
+    addrLn3:{
         type:String
     },
-    AddrLn4:{
+    addrLn4:{
         type:String
     },
-    City:{
+    city:{
         type:String,
         require:true
     },
-    State:{
+    state:{
         type:String,
         require:true
     },
-    Country:{
+    country:{
         type:String,
         require:true
     },
-    ZipCode:{
+    zipCode:{
         type:String,
         require:true
     },
     cntactDtls:{
-        PrimPhnNum:{
+        primPhnNum:{
             type:Number,
             require:true
         },
-        ScndPhnNum:{
+        scndPhnNum:{
             type:Number
         },
-        EmlAddr:{
+        emlAddr:{
             type:String,
             require:true
         },

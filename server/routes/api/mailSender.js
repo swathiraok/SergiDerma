@@ -40,6 +40,7 @@ router.post("/sendTo",async(req,res,next) =>{
                      messageToSearchWith.encryptFieldsSync();
                      console.log("email",messageToSearchWith.email);
               await Patient.findOne({email:messageToSearchWith.email},function(err,info){
+                  console.info("result",info);
                    try {
                     if(err)
                     throw new ValidaError(500,err);

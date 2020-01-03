@@ -16,8 +16,8 @@ router.get("/test", (req, res) => res.send("clinicAdd route testing!"));
 //@description Add /save doctor information
 //public access
 router.post("/addDoctorInfor/",[
-    check('fname','Doctor first name is required!!').not().isEmpty(),
-    check('lname','Doctor last name is required!!').not().isEmpty(),
+    check('fName','Doctor first name is required!!').not().isEmpty(),
+    check('lName','Doctor last name is required!!').not().isEmpty(),
     check('dob','Doctor dob is required!!').not().isEmpty(),
     check('addrIn1','Doctor addr 1 is required!!').not().isEmpty(),
     check('addrIn2','Doctor addr 2 is required!!').not().isEmpty(),
@@ -26,7 +26,7 @@ router.post("/addDoctorInfor/",[
     check('city',' city is required!!').not().isEmpty(),
     check('country','country is required!!').not().isEmpty(),
     check('state','state is required!!').not().isEmpty(),
-    check('zpcode','zipCode is required!!').not().isEmpty(),
+    check('zipCode','zipCode is required!!').not().isEmpty(),
     check('contdtls','contact Details is required!!').not().isEmpty(),
     check('splzns','specialilize is required!!').not().isEmpty(),
     check('conslttmngs','Timing is required!!').not().isEmpty(),
@@ -37,14 +37,15 @@ router.post("/addDoctorInfor/",[
 ],
 async function(req,res){
     //validation check
-    console.log("triger data...")
+    console.info("triger data...")
     const errors=validationResult(req);
     console.log(req.body);
+    console.info("valisd error",errors)
     if(!errors.isEmpty()){
         return res.status(422).jsonp(errors.array());
     }else{
         DoctorInform.create(req.body)
-        .then(result => res.json({id:result.docid,
+        .then(result => res.json({id:result.docId,
                                    message: "doctor info added successfully..",
                                    status:"200" }))
         .catch(err =>res.status(500).json(err))
@@ -59,7 +60,9 @@ async function(req,res){
 */
 router.put("/updateDoctorInform", async function(req,res,next) {
     
-  await DoctorInform.findOneAndUpdate({docid:req.query.id},req.body,{new: true}, function(err,result) {
+  await DoctorInform.findOneAndUpdate({docId:req.query.id},req.body,{new: true}, function(err,result) {
+   
+    console.info("result",result);
     try {
         if(err)
         res.status(500).json(err);
@@ -86,12 +89,12 @@ router.put("/updateDoctorInform", async function(req,res,next) {
 */
 router.get("/getDoctorInform", (req,res,next) =>{
   
-    console.log("")
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
-    console.log("skip",skipPage)
-    console.log("query",req.query)
-         DoctorInform.find({docid:req.query.id},  function(err,result){       
+    console.info("skip",skipPage)
+    console.info("query",req.query)
+         DoctorInform.find({docId:req.query.id},  function(err,result){ 
+             console.info("result",result)      
            try {
             if(err)
             throw new ValidaError(500,err);

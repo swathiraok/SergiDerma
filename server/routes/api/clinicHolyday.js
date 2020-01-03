@@ -14,19 +14,20 @@ router.get("/test", (req, res) => res.send("clinicAdd route testing!"));
 
 
 router.post("/addClinicHolyday/",[
-    check('ClinId','clinic ClinId is required!!').not().isEmpty(),
+    check('clinId','clinic ClinId is required!!').not().isEmpty(),
     check('dt','clinic holy day is required!!').not().isEmpty(),
-    check('Htype','clinic type is required!!').not().isEmpty()
+    check('hType','clinic type is required!!').not().isEmpty()
 ],
 async function(req,res){
     //validation check
     const errors=validationResult(req);
-    console.log(req.body);
+    console.info(req.body);
+    console.info("error",errors)
     if(!errors.isEmpty()){
         return res.status(422).jsonp(errors.array());
     }else{
       ClinicHolyday.create(req.body)
-        .then(result => res.json({id:result.ClinId,
+        .then(result => res.json({id:result.clinId,
                                    message: "ClinicHoly added successfully..",
                                    status:"200" }))
         .catch(err =>res.status(500).json(err))
@@ -40,13 +41,14 @@ async function(req,res){
 //@public access
 //@paramter day:1222
 router.put("/updateClinicHolyday",[
-    check('ClinId','clinic ClinId is required!!').not().isEmpty(),
+    check('clinId','clinic ClinId is required!!').not().isEmpty(),
     check('dt','clinic holy day is required!!').not().isEmpty(),
-    check('Htype','clinic type is required!!').not().isEmpty()
+    check('hType','clinic type is required!!').not().isEmpty()
 ], async function(req,res,next) {
 
-    console.log("day",req.query.day)
+    console.info("day",req.query.day)
     const errors=validationResult(req);
+    console.info("valid error",errors)
     if(!errors.isEmpty()){
         return res.status(422).jsonp(errors.array());
     }else{
@@ -79,13 +81,14 @@ router.put("/updateClinicHolyday",[
 */
 router.get("/getClinicHolyday",(req,res,next) =>{
 
-    console.log("id",req.query.id)
+    console.info("id",req.query.id)
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
 
-    console.log("skip",skipPage)
-    console.log("query",req.query)
-    ClinicHolyday.find({ClinId:req.query.id},function(err,result){
+    console.info("skip",skipPage)
+    console.info("query",req.query)
+    ClinicHolyday.find({clinId:req.query.id},function(err,result){
+        console.info("result",result);
         try {
             if(err)
             res.status(500).json(err)

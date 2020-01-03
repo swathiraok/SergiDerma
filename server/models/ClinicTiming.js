@@ -2,7 +2,7 @@ const mongoos=require('mongoose');
 
 
 const ClinicTimingSchema=new mongoos.Schema({
-    ClinId:{
+    clinId:{
         type:String,
         require:true
     },
@@ -10,7 +10,7 @@ const ClinicTimingSchema=new mongoos.Schema({
         type:String,
         require:true
     },
-    Tmng:{
+    tmng:{
         type:JSON,
         require:true
     }

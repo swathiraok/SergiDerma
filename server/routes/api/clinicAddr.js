@@ -17,16 +17,16 @@ router.get("/test", (req, res) => res.send("clinicAdd route testing!"));
 //server validation "check"
 
 router.post("/addClinicAdd/",[
-    check('AddrLn1','clinic address1 is required!!').not().isEmpty(),
-    check('AddrLn2','clinic address2 is required!!').not().isEmpty(),
-    check('AddrLn3','clinic address3 is required!!').not().isEmpty(),
-    check('AddrLn4','clinic address4 is required!!').not().isEmpty(),
-    check('City','clinic city is required!!').not().isEmpty(),
-    check('State','clinic state is required!!').not().isEmpty(),
-    check('Country','clinic country group is required!!').not().isEmpty(),
-    check('ZipCode','clinic zipCode is required!!').not().isEmpty(),
-    check('cntactDtls.PrimPhnNum','clinic PrimPhnNum  is required!!').not().isEmpty(),
-    check('cntactDtls.EmlAddr','clinic emlAddr is required!!').not().isEmpty(),
+    check('addrLn1','clinic address1 is required!!').not().isEmpty(),
+    check('addrLn2','clinic address2 is required!!').not().isEmpty(),
+    check('addrLn3','clinic address3 is required!!').not().isEmpty(),
+    check('addrLn4','clinic address4 is required!!').not().isEmpty(),
+    check('city','clinic city is required!!').not().isEmpty(),
+    check('state','clinic state is required!!').not().isEmpty(),
+    check('country','clinic country group is required!!').not().isEmpty(),
+    check('zipCode','clinic zipCode is required!!').not().isEmpty(),
+    check('cntactDtls.primPhnNum','clinic PrimPhnNum  is required!!').not().isEmpty(),
+    check('cntactDtls.emlAddr','clinic emlAddr is required!!').not().isEmpty(),
     check('locdtls','clinic locdtls is required!!').not().isEmpty(),
     check('cntactDtls.website','clinic website is required!!').not().isEmpty()
 
@@ -41,8 +41,10 @@ async function(req,res,next){
         return res.status(422).jsonp(errors.array());
     }else{
         
-        var checkEmailAndEmail=await ClinicAddr.findOne({'cntactDtls.EmlAddr':req.body.cntactDtls.EmlAddr});
-        var checkEmailAndPhone=await ClinicAddr.findOne({'cntactDtls.PrimPhnNum':req.body.cntactDtls.PrimPhnNum});
+        var checkEmailAndEmail=await ClinicAddr.findOne({'cntactDtls.EmlAddr':req.body.cntactDtls.emlAddr});
+        console.info("email",req.body.cntactDtls.EmlAddr);
+        var checkEmailAndPhone=await ClinicAddr.findOne({'cntactDtls.PrimPhnNum':req.body.cntactDtls.primPhnNum});
+        console.info("phone",req.body.cntactDtls.PrimPhnNum);
         //var checkEmailAndPhone=await ClinicAddr.findOne({'cntactDtls.EmlAddr':req.body.cntactDtls.EmlAddr});
         /* check email and phone already exit in db */
         try {
@@ -52,9 +54,11 @@ async function(req,res,next){
             throw new ValidaError(422,"Email id already exit..")
             else
             ClinicAddr.create(req.body)
-           .then(clinicAdd => res.json({id:clinicAdd.ClinId,
+           .then(clinicAdd => res.json(
+                                  {id:clinicAdd.clinId,
                                    message: "ClinicAddress added successfully..",
-                                   status:"200" }))
+                                   status:"200" }
+                                   ))
            .catch(err =>res.status(500).json(err))        
         } catch (error) {
             next(error)
@@ -70,16 +74,16 @@ async function(req,res,next){
  */
 
  router.put("/updateClinicAdd",[
-    check('AddrLn1','clinic address1 is required!!').not().isEmpty(),
-    check('AddrLn2','clinic address2 is required!!').not().isEmpty(),
-    check('AddrLn3','clinic address3 is required!!').not().isEmpty(),
-    check('AddrLn4','clinic address4 is required!!').not().isEmpty(),
-    check('City','clinic city is required!!').not().isEmpty(),
-    check('State','clinic state is required!!').not().isEmpty(),
-    check('Country','clinic country group is required!!').not().isEmpty(),
-    check('ZipCode','clinic zipCode is required!!').not().isEmpty(),
-    check('cntactDtls.PrimPhnNum','clinic PrimPhnNum  is required!!').not().isEmpty(),
-    check('cntactDtls.EmlAddr','clinic emlAddr is required!!').not().isEmpty(),
+    check('addrLn1','clinic address1 is required!!').not().isEmpty(),
+    check('addrLn2','clinic address2 is required!!').not().isEmpty(),
+    check('addrLn3','clinic address3 is required!!').not().isEmpty(),
+    check('addrLn4','clinic address4 is required!!').not().isEmpty(),
+    check('city','clinic city is required!!').not().isEmpty(),
+    check('state','clinic state is required!!').not().isEmpty(),
+    check('country','clinic country group is required!!').not().isEmpty(),
+    check('zipCode','clinic zipCode is required!!').not().isEmpty(),
+    check('cntactDtls.primPhnNum','clinic PrimPhnNum  is required!!').not().isEmpty(),
+    check('cntactDtls.emlAddr','clinic emlAddr is required!!').not().isEmpty(),
     check('locdtls','clinic locdtls is required!!').not().isEmpty(),
     check('cntactDtls.website','clinic website is required!!').not().isEmpty()
     //check('pntnHabit','Your email id is not valid').not().isEmpty()
@@ -88,10 +92,12 @@ async function(req,res,next){
 //validation check
 const errors=validationResult(req);
     if(!errors.isEmpty()){
+        console.info("Error",errors);
         return res.status(422).jsonp(errors.array());
     }else{
        await ClinicAddr.findOneAndUpdate({ClinId:req.query.id},req.body)
                    .then(result =>{
+                    console.info("result",result)
                        try {
                            if(result==null)
                            throw new ValidaError(404,"Unable to find " +req.query.id);
@@ -123,6 +129,7 @@ router.get("/getClinicAllAddress",(req,res,next) =>{
     console.log("query",req.query)
     ClinicAddr.find().skip(skipPage).limit(limitPage)
             .then(result =>{
+                console.info("Result",result);
                 try {
                     if(result.length==0)
                     throw new ValidaError(400, 'Unable to find');

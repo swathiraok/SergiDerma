@@ -3,18 +3,18 @@ const mongooseFieldEncryption = require("mongoose-field-encryption").fieldEncryp
 var keyString = "hpXa6pTJOWDAClC/J6POVTjvJpMIiPAMQiTMjBrcOGw=";
 
 const DoctorSchema=new mongoos.Schema({
-    docid:{
+    docId:{
         type:String,
         require:true
     },
-    fname:{
+    fName:{
         type:String,
         require:true
     },
-    mname:{
+    mName:{
         type:String,
     },
-    lname:{
+    lName:{
         type:String,
         require:true
     },
@@ -50,7 +50,7 @@ const DoctorSchema=new mongoos.Schema({
         type:String,
         require:true
     },
-    zpcode:{
+    zipCode:{
         type:Number,
         require:true
     },

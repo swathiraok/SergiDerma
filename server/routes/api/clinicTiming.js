@@ -14,18 +14,18 @@ router.get("/test", (req, res) => res.send("clinicAdd route testing!"));
 
 
 router.post("/addClinicTiming/",[
-    check('ClinId','clinic ClinId is required!!').not().isEmpty(),
+    check('clinId','clinic ClinId is required!!').not().isEmpty(),
     check('day','clinic timing day is required!!').not().isEmpty(),
-    check('Tmng','clinic timing is required!!').not().isEmpty()
+    check('tmng','clinic timing is required!!').not().isEmpty()
 ],
 async function(req,res){
     //validation check
     const errors=validationResult(req);
-    console.log(req.body);
+    console.info(req.body);
+    console.info("valid error",errors);
     if(!errors.isEmpty()){
         return res.status(422).jsonp(errors.array());
     }else{
-    
         let totalDay= ClinicTiming.find();
         /* check email and phone already exit in db */
         console.log("lenght",(await totalDay).length);
@@ -34,7 +34,7 @@ async function(req,res){
             res.json({message:"not allow  more than seven days timing"})
         }else{
           ClinicTiming.create(req.body)
-        .then(result => res.json({id:result.ClinId,
+        .then(result => res.json({id:result.clinId,
                                    message: "ClinicAddress added successfully..",
                                    status:"200" }))
         .catch(err =>res.status(500).json(err))
@@ -49,6 +49,7 @@ async function(req,res){
 router.put("/updateClinicTiming", async function(req,res,next) {
 
   await ClinicTiming.findOneAndUpdate({day:req.query.day},req.body,{new: true}, function(err,result) {
+      console.info("result",result);
       try {
         if(err)
         res.status(500).json(err);
@@ -78,9 +79,10 @@ router.get("/getClinicTiming",(req,res,next) =>{
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
 
-    console.log("skip",skipPage)
-    console.log("query",req.query)
-    ClinicTiming.find({ClinId:req.query.id},function(err,result){
+    console.info("skip",skipPage)
+    console.info("query",req.query)
+    ClinicTiming.find({clinId:req.query.id},function(err,result){
+        console.info("result",result)
         try {
         if(err)
         res.status(500).json(err)

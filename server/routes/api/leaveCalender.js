@@ -20,16 +20,18 @@ router.post("/addLeaveCalinder/",[
 async function(req,res){
     //validation check
     const errors=validationResult(req);
-    console.log(req.body);
+    console.info(req.body);
+    console.info("valid error",errors);
     if(!errors.isEmpty()){
         return res.status(422).jsonp(errors.array());
     }else{
-    
-    
         LeaveCalender.create(req.body)
-        .then(result => res.json({id:result.dId,
+        .then(result => {
+            console.info("result",result);
+            res.json({id:result.dId,
                                    message: "ClinicAddress added successfully..",
-                                   status:"200" }))
+                                   status:"200" })
+                                })
         .catch(err =>res.status(500).json(err))
     
       
@@ -45,6 +47,8 @@ async function(req,res){
 router.put("/updateLeaveCalinder", async function(req,res) {
     
   await LeaveCalender.findOneAndUpdate({dId:req.query.id},req.body,{new: true}, function(err,result) {
+      console.info("error",err);
+      console.info("result",result);
        if(err)
        res.status(500).json(err);
        else
@@ -69,9 +73,11 @@ router.get("/getleaveCalender",(req,res) =>{
     let skipPage=Number(req.query.page);
     let limitPage=Number(req.query.size);
 
-    console.log("skip",skipPage)
-    console.log("query",req.query)
+    console.info("skip",skipPage)
+    console.info("query",req.query)
     LeaveCalender.find({dId:req.query.id},function(err,result){
+        console.info("error",err);
+        console.info("result",result);
         if(err)
         res.status(500).json(err)
         else
