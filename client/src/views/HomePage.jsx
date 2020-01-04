@@ -12,6 +12,10 @@ class HomePage extends Component {
       this.doctors = this.doctors.bind(this);
       this.patients = this.patients.bind(this);
       this.home = this.home.bind(this);
+
+      this.consultaion = this.consultaion.bind(this);
+      this.createappointments = this.createappointments.bind(this);
+      this.appointments =this.appointments.bind(this);
   }
   register(){
      this.props.history.push("/register");
@@ -25,6 +29,15 @@ class HomePage extends Component {
   home(){
     this.props.history.push("/");
   }
+  consultaion(){
+    this.props.history.push("/consultaion");
+  }
+  createappointments(){
+    this.props.history.push("/bookAppointments");
+  }
+  appointments(){
+    this.props.history.push("/appointments");
+  }
   render() {
     return (
       <div className="row topspacing container">
@@ -32,9 +45,9 @@ class HomePage extends Component {
           <button className="float-left tiles" onClick={this.register}>Register</button>
            <button className="float-left tiles" onClick={this.doctors}>Doctors</button>
             <button className="float-left tiles" onClick={this.patients}>Patients</button>
-             <button className="float-left tiles" onClick={this.home}>Prescriptions</button>
-              <button className="float-left tiles" onClick={this.home}>Documents</button>
-               <button className="float-left tiles" onClick={this.home}>Invoices</button>
+             <button className="float-left tiles" onClick={this.consultaion}>Consultaion</button>
+              <button className="float-left tiles" onClick={this.createappointments}>Book Appointment</button>
+               <button className="float-left tiles" onClick={this.appointments}>Todays Appointments</button>
                 <button className="float-left tiles" onClick={this.home}>Notes</button>
                  <button className="float-left tiles" onClick={this.home}>Reports</button>
 

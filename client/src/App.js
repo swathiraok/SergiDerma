@@ -9,6 +9,9 @@ import ProfilePage from '././views/DoctorProfile/ProfilePage';
 import RegisterPage from '././views/PatientRegister/RegisterPage';
 import AddInfo from '././views/PatientAdditionalInfo/AddInfo';
 import Patients from './views/Patients';
+import AddDetails from './views/Consultaion/AddDetails';
+import BookAppointment from './views/Appointment/BookAppointment';
+import Appointments from './views/Appointment/Appointments';
 
 class App extends Component {
   render() {
@@ -21,11 +24,14 @@ class App extends Component {
           <Route path='/register' component={RegisterPage} />
           <Route path='/patientInfo' component={AddInfo} />
            <Route path='/patients' component={Patients} />
+           <Route path='/consultaion' component={AddDetails} />
+           <Route path="/bookAppointments" component={BookAppointment} />
+           <Route path="/appointments" component={Appointments} />
           {/* <Route path='/create-book' component={CreateBook} />
           <Route path='/edit-book/:id' component={UpdateBookInfo} />
           <Route path='/show-book/:id' component={ShowBookDetails} /> */}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     // //  <div>
     // //   <Header/>
