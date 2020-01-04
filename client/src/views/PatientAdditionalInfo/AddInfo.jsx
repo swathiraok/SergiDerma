@@ -110,8 +110,11 @@ class AddInfo extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
+            <div className="col-md-2 float-right">
+              <p>Patinet Name</p>
+              <p>Age</p>
+            </div>
               <h5>Patient Basic Information details</h5>
-
               <form onSubmit={this.onSubmitData}>
                 <div>
                   <h4>Physical Information</h4>
@@ -590,6 +593,7 @@ class AddInfo extends Component {
                     <input
                       type="submit"
                       className="btn btn-success btn-block"
+                      value="Submit"
                     />
                   </div>
                 </div>

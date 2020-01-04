@@ -48,7 +48,7 @@ class RegisterPage extends Component {
           type: ""
         });
         alert("Patient saved successfully");
-        this.props.history.push("/");
+        this.props.history.push("/patients");
       })
       .catch(err => {
         console.log("Error in Patient Registration!");
@@ -62,7 +62,6 @@ class RegisterPage extends Component {
           <div className="row">
             <div className="col-md-12">
               <h5>Register Patient</h5>
-
               <form onSubmit={this.onSubmit}>
                 <div className="row">
                   <div className="col-md-4">
@@ -225,7 +224,7 @@ class RegisterPage extends Component {
                   </div>
                 </div>
                 <div className="col-md-2  float-right">
-                  <input type="submit" className="btn btn-success btn-block" />
+                  <input type="submit" className="btn btn-success btn-block" value="Submit" />
                 </div>
               </form>
             </div>

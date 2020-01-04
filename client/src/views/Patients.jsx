@@ -108,8 +108,8 @@ class Patients extends Component {
               Cell: row => (
                 <div>
                     <button className="btn btn-success btn-block">Start Consultation</button>
-                    <button className="btn btn-success btn-block">Stop Consulation</button>
-                    <button className="btn btn-success btn-block"onClick={this.handleClick}>Add</button>
+                    <button className="btn btn-success btn-block btn-stop">Stop Consulation</button>
+                    <button className="btn btn-success btn-block btn-add"onClick={this.handleClick}>Add</button>
                 </div>
             )
               // Cell: MyCell,

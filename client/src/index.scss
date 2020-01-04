@@ -120,7 +120,6 @@
   }
   .ReactTable {
     border: 0;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
     font-size: 15px;
     line-height: 1.5em;
     div {
@@ -152,10 +151,19 @@
       font-size: 14px;
       line-height: 1.5em;
       padding: 5px;
+      opacity: 0.6;
       &.active,
       &:focus,
       &:hover {
-        background-color: #1e7e34;
+        opacity: 1;
+      }
+      &.btn-stop{
+        background-color: #db4437;
+        border-color: #db4437;
+      }
+      &.btn-add{
+        background-color: #9896a4;
+        border-color: #9896a4;
       }
     }
     .pagination-bottom {
@@ -175,10 +183,17 @@
         }
       }
     }
+    .btn-block {
+      background-color: #218838;
+      border-color: #218838;
+    }
   }
   .btn-block {
     background-color: #3f51b5;
     border-color: #3f51b5;
+  }
+  p{
+    margin-bottom: 0;
   }
 }
 
