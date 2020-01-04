@@ -47,14 +47,15 @@
     // align-items: center;
     // justify-content: center;
     margin: 2.5%;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    // box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
     font-size: 18px;
     line-height: 1.5em;
     cursor: pointer;
     border-width: 0;
-    &:hover,&:focus{
-        color: #fff;
-        background-color: #3f51b5;
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: #3f51b5;
     }
   }
   .profileWrap {
@@ -66,16 +67,15 @@
       min-height: 65px;
       font-weight: normal;
     }
-    p{
-        font-size: 14px;
-        line-height: 1.5em;
-        &.specialization{
-            min-height:79px;
-            
-        }
+    p {
+      font-size: 14px;
+      line-height: 1.5em;
+      &.specialization {
+        min-height: 79px;
+      }
     }
-    .description{
-        min-height:225px;
+    .description {
+      min-height: 225px;
     }
   }
   .svgIconWrap {
@@ -118,27 +118,65 @@
       }
     }
   }
-  .ReactTable{
-      border: 0;
-      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-      div{
-        margin-bottom: 0;
-      }
-    .rt-thead .rt-th{
-        padding: 10px;
-        background-color: #4CAF50;
-        color: #fff;
-        text-align: left;
+  .ReactTable {
+    border: 0;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    font-size: 15px;
+    line-height: 1.5em;
+    div {
+      margin-bottom: 0;
     }
-    
-    .rt-tbody{
-        .rt-tr{
-            font-size: 15px;
-            &.-even{
-                background-color: #f2f2f2;
-            }
+    .rt-thead .rt-th {
+      padding: 15px;
+      background-color: #4caf50;
+      color: #fff;
+      text-align: left;
+    }
+
+    .rt-tbody {
+      .rt-tr {
+        font-size: 15px;
+        .rt-td {
+          padding: 5px 10px;
         }
+        &.-even {
+          background-color: #f2f2f2;
+        }
+      }
     }
+
+    .btn-block {
+      display: inline-block;
+      width: auto;
+      margin-right: 10px;
+      font-size: 14px;
+      line-height: 1.5em;
+      padding: 5px;
+      &.active,
+      &:focus,
+      &:hover {
+        background-color: #1e7e34;
+      }
+    }
+    .pagination-bottom {
+      .-next {
+        float: right;
+      }
+      .-btn {
+        width: 150px;
+        background-color: #4caf50;
+        color: #fff;
+        &:hover,
+        &:focus,
+        &:not([disabled]):hover {
+          background-color: #46a049;
+        }
+      }
+    }
+  }
+  .btn-block {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
   }
 }
 
@@ -159,13 +197,22 @@
     color: #3f51b5;
     font-weight: 600;
   }
+  .form-control {
+    border: 1px solid #b4b4be;
+    border-radius: 2px;
+    margin-top: 8px;
+    &:focus {
+      border-color: #3f51b5;
+      box-shadow: none;
+    }
+  }
 }
 .footerWrap {
   width: 100%;
   float: left;
   padding: 10px;
   background-color: #f4f4f4;
-//   position: fixed;
+  //   position: fixed;
   bottom: 0;
   right: 0;
   img {
