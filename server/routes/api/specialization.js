@@ -2,6 +2,7 @@ const express  = require("express");
 const router = express.Router();
 
 const { check, validationResult} = require("express-validator");
+const { Errorhandler, handleError} = require("../../helper/error")
 
 //load the model
 const Specialization = require("../../models/Specialization");
@@ -20,7 +21,7 @@ router.post("/",
         .not()
         .isEmpty()
 ],
-function(req, res) {
+async function(req, res) {
     const errors = validationResult(req);
     console.log(req.body);
     if(!errors.isEmpty()) {
@@ -60,30 +61,7 @@ router.get("/", (req, res) => {
  * @description update specialization
  * @access public
  */
-// router.put("/:id",async function(req, res){
-
-//     //validate the request
-//     if(!req.body){
-//         return res.status(400).json({ message : "request body cannot be empty"});
-//     }
-//     //find the clinic specs by Id and update it 
-//     Specialization.findByIdAndUpdate(req.params.id, req.body)
-//         .then(specializations => {
-//             if(!specializations){
-//                 return res.status(404).json({ message : "specialization not found with id" + req.params.id });
-//             }
-//             return res.json({message: "specialization data updated successfully"});
-//         })
-//         .catch(err => {
-//             if(err.kind === 'objectId'){
-//                 return res.status(404).json({ message : "service not found with id" + req.params.id })
-//             }
-//             return res.status(500).json({ message : "Error in updating with id" + req.params.id})
-//         })
-
-
-// });
-router.post("/",
+router.put("/:id",
 [
     check("name", "name is mandatory and cant be empty")
         .not()
@@ -101,15 +79,15 @@ async function(req,res,next) {
            await Specialization.findOneAndUpdate({id:req.query.id},req.body)
             .then(specializations =>{
             try {
-                if(specializations == null)
-                throw new ValidaError(404,"Unable to find " +req.query.id);
+                if(!specializations)
+                throw new Errorhandler(404,"such specializatio doesnt exists with id" +req.query.id);
                 else
-                res.json(specializations);
+                res.json({message: "successfully updated the specilization"});
                 } catch (error) {
                     next(error);
                 }
             })
-            .catch(err =>res.json(err));    
+            .catch(err =>res.json({message:"error in updating the specialization;"}));    
         }
 });           
 

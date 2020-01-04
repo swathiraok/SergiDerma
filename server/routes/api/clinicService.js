@@ -2,6 +2,7 @@ const express =  require("express");
 const router = express.Router();
 
 const { check, validationResult} = require("express-validator");
+const { ErrorHandler, handleError} = require('../../helper/error');
 
 //Load the service model
 const ClinicService = require("../../models/ClinicService");
@@ -58,37 +59,8 @@ router.get('/', (req, res)=>{
 });
 
 
-/**
- * @route PUT /:id
- * @description Update the clinic services 
- * @access admin
- */
-// router.put('/:id', async function(req, res) {
-//     //validate the request
-//     if(!req.body){
-//         return res.status(400).json({
-//             message: "request body cant be empty"
-//         });
-//     }
 
-//     //find the clinic service by id and update it 
-//     ClinicService.findByIdAndUpdate(req.params.id, req.body)
-//     .then(services => {
-//         if(!services){
-//             return res.status(404).json({ message : "service not found wit Id" + req.params.id});
-//         }
-//         res.json({ message: "clinic service data updated successfully"});
-//     })
-//     .catch(err => {
-//         if(err.kind === 'objectId') {
-//             return res.status(404).json({ message: "service not found with id" + req.params.id});
-//         }
-//         return res.status(500).send({ message : "Error in updating with id " + req.params.id});
-//     });
-// });
-
-router.put(
-    "/",
+router.put("/:id",
     [
       check("cd", "servicecode or serviceid required")
         .not()
@@ -101,20 +73,20 @@ router.put(
         //validation check
         const errors=validationResult(req);
             if(!errors.isEmpty()){
-                return res.status(422).jsonp(errors.array());
+                return res.statusCode(400).jsonp(errors.array());
             }else{
-               await ClinicAddr.findOneAndUpdate({ClinId:req.query.id},req.body)
-                .then(result =>{
+               await ClinicService.findOneAndUpdate({id:req.query.id},req.body)
+                .then(clinicserviceResult =>{
                 try {
-                    if(result==null)
-                    throw new ValidaError(404,"Unable to find " +req.query.id);
+                    if(!clinicserviceResult)
+                    throw new ErrorHandler (404,"no such type of clinic service exists with id  " +req.query.id);
                     else
-                    res.json(result);
+                    res.json({message: "updated the the clinic services successfully"});
                     } catch (error) {
                         next(error);
                     }
                 })
-                .catch(err =>res.json(err));    
+                .catch(err =>res.statusCode(500).json({message: "Error in updatng the clinic services"}));    
             }
 });            
         

@@ -1,6 +1,6 @@
 const express  = require("express");
 const router = express.Router();
-const { handleError, ErrorHandler } = require('../../helper/error');
+const { handleError, ErrorHandler } = require('../../helpers/error');
 
 const { check, validationResult} = require("express-validator");
 
@@ -86,7 +86,7 @@ router.get("/", (req, res) => {
 //         })
 // });
 
-router.put("/",
+router.put("/:id",
 [
     check("cd", "code is mandatory and cant be empty")
         .not()
@@ -105,10 +105,10 @@ async function(req,res,next) {
            await AppointmnetState.findOneAndUpdate({id:req.query.id},req.body)
                 .then(appointments =>{
                     try {
-                        if(appointments==null)
-                        throw new ValidaError(404,"Unable to find " +req.query.id);
+                        if(!appointments)
+                        throw new ErrorHandler(404,"Unable to find " +req.query.id);
                         else
-                        res.json(appointments);
+                        res.json({message:"successfully updated"});
                     } catch (error) {
                         next(error);
                     }
@@ -116,7 +116,5 @@ async function(req,res,next) {
                 .catch(err =>res.json(err));    
     }
 });  
-
-
 
 module.exports = router;
