@@ -46,7 +46,7 @@ class Appointments extends Component {
   componentDidMount(e) {
     // get all appointments
     axios
-      .get("http://localhost:8082/appointments/")
+      .get("http://139.59.3.138:8082/appointments/")
       .then(response => response.data)
       .then(data => {
         this.setState({ tableData: data });

@@ -44,7 +44,7 @@ class BookAppointment extends Component {
     };
 
     axios
-      .post("http://localhost:8082/appointments/", data)
+      .post("http://139.59.3.138:8082/appointments/", data)
       .then(res => {
         this.setState({
           drNm: "",
