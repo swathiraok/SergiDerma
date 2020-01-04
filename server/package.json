@@ -26,7 +26,7 @@
     "dateformat": "^3.0.3",
     "express": "^4.17.1",
     "express-validator": "^6.3.0",
-    "mongoose": "^5.5.15",
+    "mongoose": "^5.7.5",
     "multer-gridfs-storage": "^4.0.1",
     "nanoid": "^2.1.8",
     "short-id": "0.1.0-1",
