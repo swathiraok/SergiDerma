@@ -7,7 +7,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import ProfilePage from '././views/DoctorProfile/ProfilePage';
 import RegisterPage from '././views/PatientRegister/RegisterPage';
-import AddBasicInfo from '././views/PatientBasicInfo/AddBasicInfo';
+import AddInfo from '././views/PatientAdditionalInfo/AddInfo';
 import Patients from './views/Patients';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
           <Route exact path='/' component={HomePage} />
           <Route path='/doctors' component={ProfilePage} />
           <Route path='/register' component={RegisterPage} />
-          <Route path='/basicInfo' component={AddBasicInfo} />
+          <Route path='/patientInfo' component={AddInfo} />
            <Route path='/patients' component={Patients} />
           {/* <Route path='/create-book' component={CreateBook} />
           <Route path='/edit-book/:id' component={UpdateBookInfo} />

@@ -36,14 +36,17 @@ class Patients extends Component {
         }
       ]
     };
-    // this.handleEdit=this.handleEdit.bind(this);
+    this.handleClick=this.handleClick.bind(this);
   }
-  handleEdit(e){
-    alert('edit button clicked');
+  handleClick(){
+    this.props.history.push("/patientInfo");
   }
-  handleDelete(){
-    alert('delete button clicked');
-  }
+  // handleEdit(e){
+  //   alert('edit button clicked');
+  // }
+  // handleDelete(){
+  //   alert('delete button clicked');
+  // }
   componentDidMount(e) {
     // get all patients
     axios
@@ -60,6 +63,7 @@ class Patients extends Component {
       });
     });
   };
+  
   // handleInputChange = () => {
   //   this.setState(
   //     {
@@ -105,7 +109,7 @@ class Patients extends Component {
                 <div>
                     <button className="btn btn-success btn-block">Start Consultation</button>
                     <button className="btn btn-success btn-block">Stop Consulation</button>
-                    <button className="btn btn-success btn-block">Add</button>
+                    <button className="btn btn-success btn-block"onClick={this.handleClick}>Add</button>
                 </div>
             )
               // Cell: MyCell,

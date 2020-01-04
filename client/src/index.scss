@@ -160,7 +160,9 @@
     }
     .pagination-bottom {
       .-next {
-        float: right;
+        .-btn {
+          float: right;
+        }
       }
       .-btn {
         width: 150px;
