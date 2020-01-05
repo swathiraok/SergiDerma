@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../index.scss";
 
 const timeOptions = [
+  { value: "Select Time", Label: "Select Time" },
   { value: "9:30AM - 10:00AM", Label: "9:30AM - 10:00AM" },
   { value: "10:00AM - 10:30AM", Label: "10:00AM - 10:30AM" },
   { value: "10:30AM - 11:00AM", Label: "10:30AM - 11:00AM" },
@@ -62,14 +63,14 @@ class BookAppointment extends Component {
 
   render() {
     return (
-      <div className="topspacing">
+      <div className="topspacing appointmentWrap">
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <h5>Book Appointment</h5>
               <form onSubmit={this.onSubmit}>
                 <div className="row">
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -82,7 +83,7 @@ class BookAppointment extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -95,7 +96,7 @@ class BookAppointment extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="date"
@@ -110,34 +111,23 @@ class BookAppointment extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
-                        <label>Time</label>
-                    <select
+                      <label>Time</label>
+                      <select
                         value={this.state.time}
                         onChange={this.onChange}
                         required
                         name="time"
                       >
                         {timeOptions.map(option => (
-                          <option value={option.value}>
-                            {option.Label}
-                          </option>
-                        ))} 
+                          <option value={option.value}>{option.Label}</option>
+                        ))}
                       </select>
-                      {/* <input
-                        type="text"
-                        name="time"
-                        className="form-control"
-                        placeholder="Time"
-                        value={this.state.time}
-                        onChange={this.onChange}
-                        required
-                      /> */}
                     </div>
                   </div>
                 </div>
-                <div className="col-md-2  float-right">
+                <div className="col-4 col-md-2  float-right">
                   <input
                     type="submit"
                     className="btn btn-success btn-block"

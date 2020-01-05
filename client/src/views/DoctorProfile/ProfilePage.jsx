@@ -9,12 +9,12 @@ class ProfilePage extends Component {
       <div className="topspacing">
         <div className="container">
           <h5>Doctor's Profile</h5>
-          <div className="profileWrap float-left">
-            <div className="col-md-12">
-              <div className="col-md-3 float-left">
+          <div className="profileWrap">
+            <div className="row">
+              <div className="col-md-3">
                 <img src={profileImg1} alt="Ranganath" />
               </div>
-              <div className="col-md-9 float-left">
+              <div className="col-md-9">
                 <h5>Dr. Ranganath v s </h5>
                 <h6>
                   MCh - Plastic & Reconstructive Surgery, FNB - Hand and
@@ -24,13 +24,14 @@ class ProfilePage extends Component {
                   Plastic Surgeon, 14 Years Experience Overall (4 years as
                   specialist)
                 </p>
-                 <div className="description">
-                <p>
-                  Dr.Ranganath V S is a board-certified Plastic, Reconstructive
-                  & Cosmetic Surgeon. He specializes in facial, breast, and body
-                  Cosmetic and Reconstructive Surgery for women and men. He is a
-                  leading authority on Aesthetics, Anti-aging, & Beauty
-                </p>
+                <div className="description">
+                  <p>
+                    Dr.Ranganath V S is a board-certified Plastic,
+                    Reconstructive & Cosmetic Surgeon. He specializes in facial,
+                    breast, and body Cosmetic and Reconstructive Surgery for
+                    women and men. He is a leading authority on Aesthetics,
+                    Anti-aging, & Beauty
+                  </p>
                 </div>
               </div>
             </div>
@@ -49,17 +50,17 @@ class ProfilePage extends Component {
                   specialist)
                 </p>
                 <div className="description">
-                <p>
-                  Dr. Sujaya S.N. is a renowned Dermatologist, Dermato Surgeon
-                  and Cosmetic Dermatologist practicing in Bangalore. she
-                  completed MBBS from JJMC Davengere and here Dermatology degree
-                  from prestigious Bangalore Medical College.
-                </p>
-                <p>
-                  She completed Fellowship in Dermatosurgery from Bangalore
-                  Medical College. She is practicing Dermatology from past 10
-                  years in Bangalore and from past 5 years at Surgiderma
-                </p>
+                  <p>
+                    Dr. Sujaya S.N. is a renowned Dermatologist, Dermato Surgeon
+                    and Cosmetic Dermatologist practicing in Bangalore. she
+                    completed MBBS from JJMC Davengere and here Dermatology
+                    degree from prestigious Bangalore Medical College.
+                  </p>
+                  <p>
+                    She completed Fellowship in Dermatosurgery from Bangalore
+                    Medical College. She is practicing Dermatology from past 10
+                    years in Bangalore and from past 5 years at Surgiderma
+                  </p>
                 </div>
               </div>
             </div>

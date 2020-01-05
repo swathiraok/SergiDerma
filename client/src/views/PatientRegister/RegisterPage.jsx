@@ -64,7 +64,7 @@ class RegisterPage extends Component {
               <h5>Register Patient</h5>
               <form onSubmit={this.onSubmit}>
                 <div className="row">
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -77,7 +77,7 @@ class RegisterPage extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -90,7 +90,7 @@ class RegisterPage extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -105,7 +105,7 @@ class RegisterPage extends Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <div className="form-check float-left">
                         <input
@@ -136,7 +136,7 @@ class RegisterPage extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -149,7 +149,7 @@ class RegisterPage extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  <div className="col-12 col-md-4">
                     <div className="form-group">
                       <input
                         type="date"
@@ -177,7 +177,7 @@ class RegisterPage extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-8">
+                  <div className="col-12 col-md-8">
                     <div className="form-group">
                       <label htmlFor="type">Type</label> <br />
                       <div className="form-check float-left">
@@ -223,8 +223,12 @@ class RegisterPage extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-2  float-right">
-                  <input type="submit" className="btn btn-success btn-block" value="Submit" />
+                <div className="col-6 col-md-2 float-right">
+                  <input
+                    type="submit"
+                    className="btn btn-success btn-block"
+                    value="Submit"
+                  />
                 </div>
               </form>
             </div>

@@ -19,30 +19,20 @@ const columns = [
   }
 ];
 
-// function MyCell({ value, columnProps: { rest: { someFunc } } }) {
-//   return <a href="#" onClick={someFunc}>{value}</a>
-// }
 class Appointments extends Component {
   constructor() {
     super();
     this.state = {
-      // query: "",
-      // results: [],
       tableData: [
         {
           time: "",
-            drNm: "",
-            ptNm: ""
+          drNm: "",
+          ptNm: ""
         }
       ]
     };
   }
-  // handleEdit(e){
-  //   alert('edit button clicked');
-  // }
-  // handleDelete(){
-  //   alert('delete button clicked');
-  // }
+
   componentDidMount(e) {
     // get all appointments
     axios
