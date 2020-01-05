@@ -81,8 +81,8 @@ class Patients extends Component {
   render() {
     const { tableData } = this.state;
     return (
-      <div className="container">
-        <div className="topspacing">
+      <div className="topspacing">
+        <div className="container">
          {/* <form>
           <input
             placeholder="Search for..."

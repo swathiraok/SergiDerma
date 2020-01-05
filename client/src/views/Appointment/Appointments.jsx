@@ -6,16 +6,16 @@ import ReactTable from "react-table";
 // table columns
 const columns = [
   {
-    Header: "Time",
-    accessor: "time"
-  },
-  {
     Header: "Doctor Name",
     accessor: "drNm"
   },
   {
     Header: "Patient Name",
     accessor: "ptNm"
+  },
+  {
+    Header: "Time",
+    accessor: "time"
   }
 ];
 
@@ -25,9 +25,9 @@ class Appointments extends Component {
     this.state = {
       tableData: [
         {
-          time: "",
           drNm: "",
-          ptNm: ""
+          ptNm: "",
+          time: ""
         }
       ]
     };
@@ -51,7 +51,7 @@ class Appointments extends Component {
           <ReactTable
             data={tableData}
             columns={columns}
-            defaultPageSize={10}
+            defaultPageSize={5}
             pageSizeOptions={[10, 30, 50]}
             showPagination={true}
           />

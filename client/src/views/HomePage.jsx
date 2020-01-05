@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import { tiles } from "../data/tiles.js";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import Appointments from "./Appointment/Appointments";
 
 import "../index.scss";
 
@@ -41,7 +42,14 @@ class HomePage extends Component {
   render() {
     return (
       <div className="topspacing container">
+        <Appointments />
         <div className="row">
+        <button className="tiles" onClick={this.createappointments}>
+            Book Appointment
+          </button>
+          <button className="tiles" onClick={this.consultaion}>
+            Start Consultaion
+          </button>
           <button className="tiles" onClick={this.register}>
             Register
           </button>
@@ -51,12 +59,8 @@ class HomePage extends Component {
           <button className="tiles" onClick={this.patients}>
             Patients
           </button>
-          <button className="tiles" onClick={this.consultaion}>
-            Consultaion
-          </button>
-          <button className="tiles" onClick={this.createappointments}>
-            Book Appointment
-          </button>
+         
+          
           <button className="tiles" onClick={this.appointments}>
             Todays Appointments
           </button>

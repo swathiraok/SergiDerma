@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Logo from "../assets/images/logo.png";
+import Logo from "../assets/images/surgidermaLogo.jfif";
 import "../index.scss";
 import axios from "axios";
 
