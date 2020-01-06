@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "../../index.scss";
+// import Default from '../../components/AppointmentCalender/index';
+
 
 class RegisterPage extends Component {
   constructor() {
@@ -150,7 +152,8 @@ class RegisterPage extends Component {
                     </div>
                   </div>
                   <div className="col-12 col-md-4">
-                    <div className="form-group">
+                    <div className="form-group date">
+                      <label>Date Of Birth</label>
                       <input
                         type="date"
                         name="dob"
@@ -234,6 +237,7 @@ class RegisterPage extends Component {
             </div>
           </div>
         </div>
+        {/* <Default /> */}
       </div>
     );
   }

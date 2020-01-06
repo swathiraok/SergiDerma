@@ -1,6 +1,16 @@
-import React, { Component } from "react";
+import React, { Component,useState } from "react";
 import axios from "axios";
 import "../../index.scss";
+// import moment from 'moment';
+
+// import MomentUtils from '@date-io/moment';
+// import {
+//   DatePicker,
+//   TimePicker,
+//   DateTimePicker,
+//   MuiPickersUtilsProvider,
+// } from "@material-ui/pickers";
+
 
 const timeOptions = [
   { value: "Select Time", Label: "Select Time" },
@@ -20,17 +30,29 @@ const timeOptions = [
   { value: "7:00PM - 7:30PM", Label: "7:00PM - 7:30PM" },
   { value: "7:30PM - 8:00PM", Label: "7:30PM - 8:00PM" }
 ];
+
+
+// const {selectedDate, setSelectedDate} = new Date();
+
 class BookAppointment extends Component {
   constructor() {
     super();
     this.state = {
       drNm: "",
       ptNm: "",
-      date: "",
-      time: ""
+      date: new Date(),
+      time: "",
+     // handleDateChange: useState(new Date())
+      // setSelectedDate: new Date
     };
     this.onChange = this.onChange.bind(this);
+    // this.handleDateChange = this.handleDateChange.bind(this);
   }
+  // handleDateChange(date) {
+  //   console.log('date is::' +date);
+  //   // this.setState({ [date.target.name]: date.target.value });
+  //    this.setState( {date});
+  // };
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -68,6 +90,7 @@ class BookAppointment extends Component {
           <div className="row">
             <div className="col-md-12">
               <h5>Book Appointment</h5>
+              {/* <MuiPickersUtilsProvider utils={MomentUtils}> */}
               <form onSubmit={this.onSubmit}>
                 <div className="row">
                   <div className="col-12 col-md-4">
@@ -97,7 +120,8 @@ class BookAppointment extends Component {
                     </div>
                   </div>
                   <div className="col-12 col-md-4">
-                    <div className="form-group">
+                    <div className="form-group date">
+                      <label>Date</label>
                       <input
                         type="date"
                         name="date"
@@ -107,6 +131,14 @@ class BookAppointment extends Component {
                         onChange={this.onChange}
                         required
                       />
+                      {/* <DatePicker
+                        openTo="year"
+                        format="dd/MM/yyyy"
+                        label="Date Of Appointment"
+                        views={["year", "month", "date"]}
+                        value={this.state.date}
+                        onChange={this.handleDateChange} 
+                      /> */}
                     </div>
                   </div>
                 </div>
@@ -135,6 +167,7 @@ class BookAppointment extends Component {
                   />
                 </div>
               </form>
+              {/* </MuiPickersUtilsProvider> */}
             </div>
           </div>
         </div>

@@ -11,10 +11,10 @@ class ProfilePage extends Component {
           <h5>Doctor's Profile</h5>
           <div className="profileWrap">
             <div className="row">
-              <div className="col-md-3">
+              <div className="col-lg-3">
                 <img src={profileImg1} alt="Ranganath" />
               </div>
-              <div className="col-md-9">
+              <div className="col-lg-9">
                 <h5>Dr. Ranganath v s </h5>
                 <h6>
                   MCh - Plastic & Reconstructive Surgery, FNB - Hand and
@@ -36,12 +36,12 @@ class ProfilePage extends Component {
               </div>
             </div>
           </div>
-          <div className="profileWrap float-left">
-            <div className="col-md-12">
-              <div className="col-md-3 float-left">
+          <div className="profileWrap">
+            <div className="row">
+              <div className="col-lg-3">
                 <img src={profileImg2} alt="Sujaya" />
               </div>
-              <div className="col-md-9 float-left">
+              <div className="col-lg-9">
                 <h5>Dr. Sujaya S.N </h5>
                 <h6>MBBS, DDVL</h6>
                 <p className="specialization">

@@ -32,7 +32,7 @@ class Appointments extends Component {
       ]
     };
   }
-
+  
   componentDidMount(e) {
     // get all appointments
     axios
