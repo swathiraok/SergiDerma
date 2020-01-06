@@ -10,10 +10,10 @@ const { handleError, ErrorHandler } = require('./helper/error')
 var cors = require("cors");
 
 // routes
-const branches = require("./routes/api/branches");
-const patients = require("./routes/api/patients");
-const doctors = require("./routes/api/doctors");
-const patientBasicInfo = require("./routes/api/patientBasicInformations");
+//const branches = require("./routes/api/branches");
+//const patients = require("./routes/api/patients");
+//const doctors = require("./routes/api/doctors");
+//const patientBasicInfo = require("./routes/api/patientBasicInformations");
 const clinicServices = require("./routes/api/clinicService");
 const specialization = require("./routes/api/specialization");
 const appointmentType = require("./routes/api/appointmentType");
@@ -32,10 +32,10 @@ app.use(express.json({ extended: false }));
 
 
 // use Routes
-app.use("/branches", branches);
-app.use("/patients", patients);
-app.use("/doctors", doctors);
-app.use("/patientBasicInfo", patientBasicInfo);
+//app.use("/branches", branches);
+//app.use("/patients", patients);
+//app.use("/doctors", doctors);
+//app.use("/patientBasicInfo", patientBasicInfo);
 app.use("/clinicService", clinicServices);
 app.use("/specialization", specialization);
 app.use("/appntType",appointmentType)
@@ -50,7 +50,7 @@ app.get('/error', (req, res) => {
 app.use((err, req, res, next) => {
     handleError(err, res);
   });
-
+  
 
 app.listen(port, () => {
     console.log('info',`Server running on port ${port}`)});

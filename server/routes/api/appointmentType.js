@@ -2,7 +2,7 @@ const express  = require("express");
 const router = express.Router();
 
 const { check, validationResult} = require("express-validator");
-const{ ErrorHandler, handleError} = require('../../helpers/error')
+const{ ErrorHandler, handleError} = require('../../helper/error')
 
 //load the model
 const AppointmnetType = require("../../models/AppointmentType");
