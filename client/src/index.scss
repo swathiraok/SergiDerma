@@ -410,6 +410,9 @@
     }
   }
   .topspacing {
+    .svgIconWrap{
+      top:92%;
+    }
     margin-top: 25%;
     div {
       margin-bottom: 15px;
@@ -435,9 +438,15 @@
     }
     .ReactTable {
       .pagination-bottom {
+        .-center{
+          flex:none;
+          display: block;
+        }
         .-btn {
           height: auto;
           width: 100px;
+          margin: 0 auto;
+          float: none !important;
         }
       }
     }
