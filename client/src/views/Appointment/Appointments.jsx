@@ -2,16 +2,21 @@ import React, { Component } from "react";
 import axios from "axios";
 import "react-table/react-table.css";
 import ReactTable from "react-table";
+import * as ReactDOM from "react-dom";
 
 // table columns
 const columns = [
   {
-    Header: "Doctor Name",
+    Header: "Doctor",
     accessor: "drNm"
   },
   {
-    Header: "Patient Name",
+    Header: "Patient",
     accessor: "ptNm"
+  },
+  {
+    Header: "Date",
+    accessor: "date"
   },
   {
     Header: "Time",
@@ -27,13 +32,27 @@ class Appointments extends Component {
         {
           drNm: "",
           ptNm: "",
-          time: ""
+          date: "",
+          time: "",
+          active: false
         }
       ]
     };
+    
+    this.showUpcoming = this.showUpcoming.bind(this);
+    this.showToday = this.showToday.bind(this);
   }
-  
-  componentDidMount(e) {
+  dataTableElement = null;
+  componentDidMount() {
+    let theads = ReactDOM.findDOMNode(this.dataTableElement).getElementsByClassName("rt-thead");
+    let tbody = ReactDOM.findDOMNode(this.dataTableElement).getElementsByClassName("rt-tbody")[0];
+
+
+    tbody.addEventListener("scroll", () => {
+      for (let i = 0; i < theads.length; i++) {
+        theads.item(i).scrollLeft = tbody.scrollLeft;
+      }
+    });
     // get all appointments
     axios
       .get("http://139.59.3.138:8082/appointments/")
@@ -41,19 +60,82 @@ class Appointments extends Component {
       .then(data => {
         this.setState({ tableData: data });
       });
+     
   }
+  componentDidUpdate() {
+    let theads = ReactDOM.findDOMNode(this.dataTableElement).getElementsByClassName("rt-thead");
+    let tbody = ReactDOM.findDOMNode(this.dataTableElement).getElementsByClassName("rt-tbody")[0];
+
+
+    if (tbody.scrollHeight > tbody.clientHeight) {
+      for (let i = 0; i < theads.length; i++) {
+        theads.item(i).classList.add("vertical-scrollbar-present");
+      }
+    }
+    else {
+      for (let i = 0; i < theads.length; i++) {
+        theads.item(i).classList.remove("vertical-scrollbar-present");
+      }
+    }
+  }
+  showUpcoming(e){
+    e.preventDefault();
+    this.setState(prevState  => ({ active: !prevState.active }));
+    axios
+    .get("http://139.59.3.138:8082/appointments/upcoming")
+    .then(response => response.data)
+    .then(data => {
+      this.setState({ tableData: data });
+    });
+   
+  }
+  showToday(e) {
+    e.preventDefault();
+    // this.setState({ active: !this.state.active });
+    this.setState(prevState  => ({ active: !prevState.active }));
+    axios
+    .get("http://139.59.3.138:8082/appointments/")
+    .then(response => response.data)
+    .then(data => {
+      this.setState({ tableData: data });
+    });
+  }
+ 
   render() {
     const { tableData } = this.state;
+    const { active } = this.state;
+
     return (
       <div className="container">
         <div className="topspacing">
-          <h5>Todays Appointments</h5>
+          <h5>Patient Appoinment</h5>
+          <div className="buttonWrap">
+          <input
+                    type="submit"
+                    className="btn btn-success btn-block"
+                    value="Upcoming"
+                    onClick={this.showUpcoming}
+                    // className={this.state.active && 'active'}
+                    // className={`${active ? "" : "active"}`}
+                  />
+                   <input
+                    type="submit"
+                    className="btn btn-success btn-block"
+                    // className={this.state.active ? 'active': null} 
+                    // className={`${active ? "" : "active"}`}
+                    value="Today"
+                    onClick={this.showToday}
+                  />
+          </div>
           <ReactTable
             data={tableData}
             columns={columns}
-            defaultPageSize={5}
-            pageSizeOptions={[10, 30, 50]}
-            showPagination={true}
+            style={{
+              height: "300px"
+            }}
+            className="-striped -highlight"
+            showPagination={false}
+            ref={(element) => { this.dataTableElement = element; }}
           />
         </div>
       </div>

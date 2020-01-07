@@ -88,7 +88,6 @@ class RegisterPage extends Component {
                         placeholder="Middle Name"
                         value={this.state.mddlNm}
                         onChange={this.onChange}
-                        required
                       />
                     </div>
                   </div>

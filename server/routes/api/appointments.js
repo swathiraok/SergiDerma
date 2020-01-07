@@ -56,4 +56,18 @@ router.get("/", (req, res) => {
     .catch(err => res.status(404).json({ error: "Unable to find!!" }));
 });
 
+
+//@route get upcoming appointments/
+//@description get all appointments by todays date
+//public access
+router.get("/upcoming", (req, res) => {
+  var now = new Date();
+  var datenow = dateFormat(now, "yyyy-mm-dd");
+  var query = { date: {$gt: datenow} };
+  var mysort = { time: 1 };
+  Appointment.find(query)
+    .sort(mysort)
+    .then(appointment => res.json(appointment))
+    .catch(err => res.status(404).json({ error: "Unable to find!!" }));
+});
 module.exports = router;

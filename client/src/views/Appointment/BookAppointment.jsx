@@ -1,6 +1,14 @@
 import React, { Component,useState } from "react";
 import axios from "axios";
 import "../../index.scss";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from "@material-ui/core/styles";
+import MomentUtils from '@date-io/moment';
+import {
+  MuiPickersUtilsProvider,
+  DatePicker
+} from "@material-ui/pickers";
 // import moment from 'moment';
 
 // import MomentUtils from '@date-io/moment';
@@ -13,7 +21,6 @@ import "../../index.scss";
 
 
 const timeOptions = [
-  { value: "Select Time", Label: "Select Time" },
   { value: "9:30AM - 10:00AM", Label: "9:30AM - 10:00AM" },
   { value: "10:00AM - 10:30AM", Label: "10:00AM - 10:30AM" },
   { value: "10:30AM - 11:00AM", Label: "10:30AM - 11:00AM" },
@@ -46,7 +53,12 @@ class BookAppointment extends Component {
       // setSelectedDate: new Date
     };
     this.onChange = this.onChange.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
     // this.handleDateChange = this.handleDateChange.bind(this);
+  }
+  handleDateChange(date) {
+    this.setState({ date: date });
   }
   // handleDateChange(date) {
   //   console.log('date is::' +date);
@@ -56,7 +68,11 @@ class BookAppointment extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  onSelectChange = (event, value) => {
+    this.setState({
+      time: value.value
+    })
+  }
   onSubmit = e => {
     e.preventDefault();
     const data = {
@@ -90,7 +106,7 @@ class BookAppointment extends Component {
           <div className="row">
             <div className="col-md-12">
               <h5>Book Appointment</h5>
-              {/* <MuiPickersUtilsProvider utils={MomentUtils}> */}
+              <MuiPickersUtilsProvider utils={MomentUtils}>
               <form onSubmit={this.onSubmit}>
                 <div className="row">
                   <div className="col-12 col-md-4">
@@ -132,12 +148,22 @@ class BookAppointment extends Component {
                         required
                       />
                       {/* <DatePicker
-                        openTo="year"
-                        format="dd/MM/yyyy"
-                        label="Date Of Appointment"
-                        views={["year", "month", "date"]}
+                        keyboard
+                        placeholder="Date"
+                        format={"YYYY/MM/DD"}
+                        // handle clearing outside => pass plain array if you are not controlling value outside
+                        mask={value =>
+                          value
+                            ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/]
+                            : []
+                        }
                         value={this.state.date}
-                        onChange={this.handleDateChange} 
+                        onChange={this.handleDateChange}
+                        disableOpenOnEnter
+                        animateYearScrolling={false}
+                        autoOk={true}
+                        clearable
+                        onInputChange={e => console.log("Keyboard:", e.target.value)}
                       /> */}
                     </div>
                   </div>
@@ -145,7 +171,7 @@ class BookAppointment extends Component {
                 <div className="row">
                   <div className="col-12 col-md-4">
                     <div className="form-group">
-                      <label>Time</label>
+                      {/* <label>Time</label>
                       <select
                         value={this.state.time}
                         onChange={this.onChange}
@@ -155,7 +181,20 @@ class BookAppointment extends Component {
                         {timeOptions.map(option => (
                           <option value={option.value}>{option.Label}</option>
                         ))}
-                      </select>
+                      </select> */}
+                       <Autocomplete
+                        id="combo-box-demo"
+                        options={timeOptions}
+                        getOptionLabel={option => option.Label}
+                        defaultValue={[timeOptions[15]]}
+                        onChange={this.onSelectChange}
+                        style={{ width: 300 }}
+                        renderInput={params => (
+                          <TextField {...params} label="Time" variant="outlined" fullWidth required/>
+                        )}
+                       
+                       
+                      />
                     </div>
                   </div>
                 </div>
@@ -167,7 +206,7 @@ class BookAppointment extends Component {
                   />
                 </div>
               </form>
-              {/* </MuiPickersUtilsProvider> */}
+              </MuiPickersUtilsProvider>
             </div>
           </div>
         </div>

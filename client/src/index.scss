@@ -291,6 +291,15 @@
       }
     }
   }
+  .buttonWrap{
+    input.btn{
+      display: inline-block;
+      width: auto;
+      color: #272b41;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
 }
   
 //   @media (max-width: 550px) {
@@ -448,6 +457,23 @@
           margin: 0 auto;
           float: none !important;
         }
+      }
+    }
+    .form-group{
+      &.date{
+        label, input{
+          top: 0;
+        }
+      }
+      .MuiInputBase-fullWidth{
+        width: 75%;
+        .MuiInputBase-input{
+          height: 0.1875em;
+        }
+      }
+      
+      .MuiInputLabel-formControl{
+        top: -6px;
       }
     }
   }
