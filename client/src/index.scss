@@ -10,7 +10,7 @@
   margin: 7% auto 1%;
   h5 {
     color: #3f51b5;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
   }
   h4 {
     width: 100%;
@@ -59,7 +59,7 @@
     // background-position: center;
     // background-size: cover;
     // display: block;
-    background-color: #4da6ff;
+    background-color: #20c0f3;
     padding: 15px;
     border-radius: 15px;
     // display: flex;
@@ -73,7 +73,6 @@
     cursor: pointer;
     border-width: 0;
     color: #fff;
-    font-weight: 525;
     &:hover,
     &:focus {
       color: #fff;
@@ -292,6 +291,7 @@
     }
   }
   .buttonWrap{
+    margin-bottom: 0;
     input.btn{
       display: inline-block;
       width: auto;
@@ -433,7 +433,8 @@
     .tiles {
       width: 30%;
       margin: 1.6%;
-      font-size: 16px;
+      font-size: 15px;
+      font-weight: 400;
     }
     .profileWrap {
       width: 100%;
@@ -469,11 +470,24 @@
         width: 75%;
         .MuiInputBase-input{
           height: 0.1875em;
-        }
+        } 
       }
       
       .MuiInputLabel-formControl{
         top: -6px;
+      }
+      .form-check{
+        label{
+          padding-right: 0;
+        }
+      }
+    }
+    .checkboxgroup{
+      ul{
+        li{
+          font-size: 15px;
+          width: 50%;
+        }
       }
     }
   }

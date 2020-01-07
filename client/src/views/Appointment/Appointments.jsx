@@ -106,7 +106,6 @@ class Appointments extends Component {
     const { active } = this.state;
 
     return (
-      <div className="container">
         <div className="topspacing">
           <h5>Patient Appoinment</h5>
           <div className="buttonWrap">
@@ -138,7 +137,6 @@ class Appointments extends Component {
             ref={(element) => { this.dataTableElement = element; }}
           />
         </div>
-      </div>
     );
   }
 }

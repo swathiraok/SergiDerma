@@ -109,17 +109,19 @@ class AddInfo extends Component {
       <div className="topspacing">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-            <div className="col-md-2 float-right">
-              <p>Patinet Name</p>
+            <div className="col-md-12 float-right">
+              <p>Patient Name</p>
               <p>Age</p>
-            </div>
+              </div>
+              <div className="col-md-12">
               <h5>Patient Basic Information details</h5>
+              </div>
               <form onSubmit={this.onSubmitData}>
-                <div>
+                <div className="col-md-12">
                   <h4>Physical Information</h4>
                 </div>
-                <div className="col-md-4 float-left">
+                <div className="row col-md-12">
+                <div className="col-md-4">
                   <div className="form-group">
                     <input
                       type="text"
@@ -131,7 +133,7 @@ class AddInfo extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-md-4 float-left">
+                <div className="col-md-4">
                   <div className="form-group">
                     <input
                       type="text"
@@ -143,7 +145,7 @@ class AddInfo extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-md-4 float-left">
+                <div className="col-md-4">
                   <div className="form-group">
                     <input
                       type="text"
@@ -155,8 +157,9 @@ class AddInfo extends Component {
                     />
                   </div>
                 </div>
-
-                <div className="col-md-4 float-left">
+                </div>
+                <div className="row col-md-12">
+                <div className="col-md-4">
                   <div className="form-group">
                     <input
                       type="text"
@@ -168,12 +171,12 @@ class AddInfo extends Component {
                     />
                   </div>
                 </div>
-
+                </div>
                 <div className="col-md-12">
-                  <div>
                     <h4>Insurance Information</h4>
                   </div>
-                  <div className="col-md-4 float-left">
+                  <div className="row col-md-12">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -185,7 +188,7 @@ class AddInfo extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4 float-left">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -197,7 +200,7 @@ class AddInfo extends Component {
                       />
                     </div>
                   </div>
-                  <div className="col-md-4 float-left">
+                  <div className="col-md-4">
                     <div className="form-group">
                       <input
                         type="text"
@@ -209,8 +212,8 @@ class AddInfo extends Component {
                       />
                     </div>
                   </div>
-                </div>
-                <div className="col-md-4 float-left">
+                  </div>
+                <div className="col-md-4">
                   <div className="form-group">
                     <input
                       type="date"
@@ -223,7 +226,7 @@ class AddInfo extends Component {
                   </div>
                 </div>
 
-                <div className="col-md-12 float-left">
+                <div className="col-md-12">
                   <div>
                     <h4>Medical History</h4>
                   </div>
@@ -599,7 +602,7 @@ class AddInfo extends Component {
                 </div>
               </form>
             </div>
-          </div>
+          
         </div>
       </div>
     );
