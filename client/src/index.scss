@@ -461,6 +461,18 @@
 @media only screen and (max-width: 1023px) {
   .topspacing {
     margin-top: 12%;
+    .ReactTable{
+      .rt-tbody{
+        .icons{
+          &.addIcon{
+            left: -13px;
+          }
+        }
+      }
+    }
+  }
+  .headerWrap .imgWrap img{
+    width: 85%;
   }
 }
 @media only screen and (max-width: 767px) {
