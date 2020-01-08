@@ -9,6 +9,7 @@ import {
   MuiPickersUtilsProvider,
   DatePicker
 } from "@material-ui/pickers";
+import  Search from '../../components/Search';
 // import moment from 'moment';
 
 // import MomentUtils from '@date-io/moment';
@@ -102,7 +103,8 @@ class BookAppointment extends Component {
   render() {
     return (
       <div className="topspacing appointmentWrap">
-        <div className="container">
+         <Search />
+        <div className="container commonWrap">
           <div className="row">
             <div className="col-md-12">
               <h5>Book Appointment</h5>
@@ -185,7 +187,7 @@ class BookAppointment extends Component {
                        <Autocomplete
                         id="combo-box-demo"
                         options={timeOptions}
-                        getOptionLabel={option => option.Label}
+                        getOptionLabel={timeOptions => timeOptions.Label?timeOptions.Label:timeOptions}
                         defaultValue={[timeOptions[15]]}
                         onChange={this.onSelectChange}
                         style={{ width: 300 }}
@@ -198,7 +200,7 @@ class BookAppointment extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-4 col-md-2  float-right">
+                <div className="col-4 col-md-6 fixedButton  float-right">
                   <input
                     type="submit"
                     className="btn btn-success btn-block"

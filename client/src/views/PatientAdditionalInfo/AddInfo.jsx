@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "index.scss";
 import { allergies } from "../../data/allergies.js";
+import  Search from '../../components/Search';
 // import { required } from "../../utils/reduxFormValiadtion.js";
 
 class AddInfo extends Component {
@@ -107,6 +108,7 @@ class AddInfo extends Component {
   render() {
     return (
       <div className="topspacing">
+         <Search />
         <div className="container">
           <div className="row">
             <div className="col-md-12 float-right">
@@ -592,7 +594,7 @@ class AddInfo extends Component {
                   </div>
                 </div>
                 <div className="col-md-12">
-                  <div className="col-md-2  float-right">
+                  <div className="col-md-6 fixedButton float-right">
                     <input
                       type="submit"
                       className="btn btn-success btn-block"

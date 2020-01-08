@@ -3,6 +3,7 @@ import axios from "axios";
 import "react-table/react-table.css";
 import ReactTable from "react-table";
 import * as ReactDOM from "react-dom";
+import  Search from '../../components/Search';
 
 // table columns
 const columns = [
@@ -106,7 +107,8 @@ class Appointments extends Component {
     const { active } = this.state;
 
     return (
-        <div className="topspacing">
+        <div className="topspacing container">
+           <Search />
           <h5>Patient Appoinment</h5>
           <div className="buttonWrap">
           <input

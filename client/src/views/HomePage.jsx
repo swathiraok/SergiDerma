@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Appointments from "./Appointment/Appointments";
+import Search from "../components/Search";
 
 import "../index.scss";
 
@@ -41,33 +42,42 @@ class HomePage extends Component {
   }
   render() {
     return (
-      <div className="topspacing container">
+        <div className="topspacing container">
         <Appointments />
         <div className="row">
         <button className="tiles" onClick={this.createappointments}>
+        <i class="far fa-calendar"></i>
             Book Appointment
           </button>
           <button className="tiles" onClick={this.consultaion}>
+          <i class="far fa-calendar-check"></i>
             Start Consultaion
           </button>
           <button className="tiles" onClick={this.register}>
+          <i class="fas fa-users"></i>
+
             Register
           </button>
           <button className="tiles" onClick={this.doctors}>
+          <i class="fas fa-users"></i>
             Doctors
           </button>
           <button className="tiles" onClick={this.patients}>
+          <i class="fas fa-users"></i>
             Patients
           </button>
          
           
           <button className="tiles" onClick={this.appointments}>
+          <i class="far fa-calendar-check"></i>
             Todays Appointments
           </button>
           <button className="tiles" onClick={this.home}>
+          <i class="far fa-comment-alt"></i>
             Notes
           </button>
           <button className="tiles" onClick={this.home}>
+          <i class="far fa-list-alt"></i>
             Reports
           </button>
 
@@ -85,7 +95,7 @@ class HomePage extends Component {
             <AddIcon />
           </Fab>
         </div>
-      </div>
+        </div>
     );
   }
 }

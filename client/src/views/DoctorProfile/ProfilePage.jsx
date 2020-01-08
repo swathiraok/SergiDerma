@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import "../../index.scss";
 import profileImg1 from "../../assets/images/ranganath.jpg";
 import profileImg2 from "../../assets/images/sujaya.jpg";
+import  Search from '../../components/Search';
 
 class ProfilePage extends Component {
   render() {
     return (
       <div className="topspacing">
+         <Search />
         <div className="container">
           <h5>Doctor's Profile</h5>
           <div className="profileWrap">

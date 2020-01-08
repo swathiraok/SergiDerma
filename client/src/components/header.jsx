@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Logo from "../assets/images/surgidermaLogo.jfif";
+import UserImage from "../assets/images/user_profile.png";
 import "../index.scss";
 import axios from "axios";
+import { Button, Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl } from 'react-bootstrap';
 
 class Header extends Component {
   constructor() {
@@ -14,7 +16,7 @@ class Header extends Component {
   getInfo = () => {
     axios.get("http://139.59.3.138:8082/patients/").then(({ data }) => {
       this.setState({
-        results: data 
+        results: data
       });
     });
   };
@@ -44,7 +46,32 @@ class Header extends Component {
           <div className="col-7 col-md-8">
             <h3 className="text-center"> SurgiDerma</h3>
           </div>
-          <div className="col-3 col-md-2">
+          <div className="col-3 col-md-2 userNavWrap
+          ">
+            <Navbar expand="lg">
+              {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
+              <Navbar id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <NavDropdown title={
+                     <div className="pull-left">
+                        <img className="thumbnail-image" 
+                            src={UserImage} 
+                            alt="user pic"
+                        />
+                    </div>
+                  }id="basic-nav-dropdown">
+                    <NavDropdown.Item href="#">
+                      User Name
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#">
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+              </Navbar>
+            </Navbar>
+          </div>
+          {/* <div className="col-3 col-md-2">
             <form>
               <input
                 className="form-control"
@@ -53,7 +80,7 @@ class Header extends Component {
                 onChange={this.handleInputChange}
               />
             </form>
-          </div>
+          </div> */}
         </div>
       </div>
     );

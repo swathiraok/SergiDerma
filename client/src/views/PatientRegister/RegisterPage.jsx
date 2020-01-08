@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "../../index.scss";
-// import Default from '../../components/AppointmentCalender/index';
+import  Search from '../../components/Search';
+// // import Default from '../../components/AppointmentCalender/index';
+// import Picker from "../../components/Picker";
+// import { MuiPickersUtilsProvider } from "material-ui-pickers/MuiPickersUtilsProvider";
+// import { MomentUtils } from 'moment';
 
 
 class RegisterPage extends Component {
@@ -13,7 +17,7 @@ class RegisterPage extends Component {
       lstNm: "",
       gndr: "",
       phnNm: "",
-      dob: "",
+      dob: Date.now(),
       email: "",
       type: ""
     };
@@ -22,7 +26,9 @@ class RegisterPage extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  handleDateChange = date => {
+    this.setState({ date });
+  };
   onSubmit = e => {
     e.preventDefault();
     const data = {
@@ -59,11 +65,14 @@ class RegisterPage extends Component {
 
   render() {
     return (
+      // <MuiPickersUtilsProvider utils={MomentUtils}>
       <div className="topspacing">
+         <Search />
         <div className="container">
           <div className="row">
             <div className="col-md-12">
               <h5>Register Patient</h5>
+             
               <form onSubmit={this.onSubmit}>
                 <div className="row">
                   <div className="col-12 col-md-4">
@@ -162,7 +171,16 @@ class RegisterPage extends Component {
                         onChange={this.onChange}
                         required
                       />
-                    </div>
+                      {/* <Picker
+                        label="DOB"
+                        onChange={this.handleDateChange}
+                        name="date"
+                        value={this.state.date}
+                        validators={["required"]}
+                        errorMessages={["date is required"]}
+                        format="DD/MM/YYYY"
+                      /> */}
+                                  </div>
                   </div>
                 </div>
                 <div className="row">
@@ -225,7 +243,7 @@ class RegisterPage extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-6 col-md-2 float-right">
+                <div className="col-6 col-md-6 float-right fixedButton">
                   <input
                     type="submit"
                     className="btn btn-success btn-block"
@@ -233,11 +251,14 @@ class RegisterPage extends Component {
                   />
                 </div>
               </form>
+              
             </div>
           </div>
         </div>
+       
         {/* <Default /> */}
       </div>
+      // </MuiPickersUtilsProvider>
     );
   }
 }
